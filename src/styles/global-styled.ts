@@ -32,7 +32,10 @@ const GlobalStyle = createGlobalStyle`
   }
   .ant-layout-sider,
   .ant-menu.ant-menu-dark,
-  .ant-layout-sider-trigger {
+  .ant-layout-sider-trigger,
+  .ant-menu-dark .ant-menu-inline.ant-menu-sub,
+  .ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, 
+  .ant-menu.ant-menu-dark .ant-menu-sub {
     background-color: #1e232e;
   }
 `;
