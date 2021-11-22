@@ -26,8 +26,14 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
   
+  // antd css custom
   .site-layout .site-layout-background {
-    background: #fff;
+    background-color: #fff;
+  }
+  .ant-layout-sider,
+  .ant-menu.ant-menu-dark,
+  .ant-layout-sider-trigger {
+    background-color: #1e232e;
   }
 `;
 
