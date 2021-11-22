@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import '../../node_modules/antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -9,7 +10,13 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
+  html {
+    font-size: 12px;
+  }
+  
   * {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
     box-sizing: border-box;
   }
 
@@ -17,6 +24,10 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     outline: none;
     color: inherit;
+  }
+  
+  .site-layout .site-layout-background {
+    background: #fff;
   }
 `;
 
