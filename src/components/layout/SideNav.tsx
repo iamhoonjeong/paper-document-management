@@ -34,6 +34,7 @@ const SideNav = () => {
       onCollapse={() => setCollapsed((prev) => !prev)}
       collapsedWidth="50"
       width="250"
+      style={{ fontSize: '12px' }}
     >
       <LogoWrap>
         {collapsed ? (
