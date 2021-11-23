@@ -10,13 +10,9 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  html {
-    font-size: 12px;
-  }
-  
   * {
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 1rem;
+    /* font-size: 1rem; */
     box-sizing: border-box;
   }
 
@@ -25,11 +21,20 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     color: inherit;
   }
+
+  header {
+    font-size: 12px;
+  }
+
+  main {
+    font-size: 12px;
+  }
   
   // antd css custom
   .site-layout .site-layout-background {
     background-color: #fff;
   }
+
   .ant-layout-sider,
   .ant-menu.ant-menu-dark,
   .ant-layout-sider-trigger,
@@ -38,6 +43,23 @@ const GlobalStyle = createGlobalStyle`
   .ant-menu.ant-menu-dark .ant-menu-sub {
     background-color: #1e232e;
   }
+
+  // side navigation
+  .ant-menu {
+    font-size: 12px;
+  }
+
+  // loading icon
+  .loading-icon {
+    font-size: 26px;
+    color: #002140;
+    position: relative;
+    left: 120px;
+
+    &.adjust {
+      left: 40px;
+    }
+  }   
 `;
 
 export default GlobalStyle;

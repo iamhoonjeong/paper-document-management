@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Layout, Avatar } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../modules/loading';
+import { UserOutlined } from '@ant-design/icons';
 
 const StyledHeader = styled(Layout.Header)`
   padding: 12px 30px;
@@ -15,11 +18,22 @@ const StyledAvatar = styled(Avatar)`
 `;
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const onLoad = () => {
+    dispatch(setLoading());
+    setTimeout(() => {
+      dispatch(setLoading());
+    }, 300);
+  };
+
   return (
     <StyledHeader className="site-layout-background">
-      <div></div>
+      <div onClick={onLoad}>새로고침</div>
       <div>
-        <StyledAvatar>User</StyledAvatar>
+        <StyledAvatar>
+          <UserOutlined style={{ fontSize: '16px' }} />
+        </StyledAvatar>
       </div>
     </StyledHeader>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 const Home = () => {
   return (
     <>
-      <div>asdf</div>
+      <div>You can now view document_library_front in the browser.</div>
     </>
   );
 };
