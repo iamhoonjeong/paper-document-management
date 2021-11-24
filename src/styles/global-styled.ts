@@ -75,7 +75,21 @@ const GlobalStyle = createGlobalStyle`
     &.adjust {
       left: 40px;
     }
-  }   
+  }
+
+  .ant-table {
+    font-size: 12px;
+    min-width: 392px;
+  }
+
+  .ant-table-thead > tr > th {
+    font-weight: bold;
+  }
+
+  .ant-dropdown-trigger > .anticon.anticon-down, .ant-dropdown-link > .anticon.anticon-down, .ant-dropdown-button > .anticon.anticon-down {
+    position: relative;
+    top: 4px;
+  }
 `;
 
 export default GlobalStyle;
