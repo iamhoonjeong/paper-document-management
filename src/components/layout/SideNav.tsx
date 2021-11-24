@@ -19,7 +19,7 @@ const LogoWide = styled.img`
 const LogoNarrow = styled.span`
   color: white;
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 24px;
 `;
 
 const SideNav = () => {
@@ -52,7 +52,7 @@ const SideNav = () => {
         </Item>
         <SubMenu key="sub1" icon={<BookOutlined />} title="문서 라이브러리">
           <Item key="2">
-            <Link to="/about">템플릿 목록</Link>
+            <Link to="/library/list">문서 목록</Link>
           </Item>
         </SubMenu>
       </Menu>

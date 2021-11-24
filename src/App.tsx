@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import SideNav from './components/layout/SideNav';
@@ -18,7 +18,9 @@ function App() {
         <SideNav />
         <Layout className="site-layout">
           <Header />
-          <Content />
+          <Switch>
+            <Content />
+          </Switch>
         </Layout>
       </Router>
     </LayoutStyles>

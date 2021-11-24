@@ -44,6 +44,22 @@ const GlobalStyle = createGlobalStyle`
     background-color: #1e232e;
   }
 
+  .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #1e232e;
+  }
+  
+  .ant-menu-dark .ant-menu-submenu-open {
+    color: #fff;
+  }
+
+  .ant-menu-dark .ant-menu-item, .ant-menu-dark .ant-menu-item-group-title, .ant-menu-dark .ant-menu-item > a, .ant-menu-dark .ant-menu-item > span > a {
+    color: #fff;
+  }
+
+  .ant-menu.ant-menu-dark, .ant-menu-dark .ant-menu-sub, .ant-menu.ant-menu-dark .ant-menu-sub {
+    color: #fff;
+  }
+  
   // side navigation
   .ant-menu {
     font-size: 12px;
@@ -59,7 +75,21 @@ const GlobalStyle = createGlobalStyle`
     &.adjust {
       left: 40px;
     }
-  }   
+  }
+
+  .ant-table {
+    font-size: 12px;
+    min-width: 392px;
+  }
+
+  .ant-table-thead > tr > th {
+    font-weight: bold;
+  }
+
+  .ant-dropdown-trigger > .anticon.anticon-down, .ant-dropdown-link > .anticon.anticon-down, .ant-dropdown-button > .anticon.anticon-down {
+    position: relative;
+    top: 4px;
+  }
 `;
 
 export default GlobalStyle;

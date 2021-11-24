@@ -1,13 +1,14 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../modules';
 
-import Home from '../../pages/home/Home';
-import About from '../../pages/about/About';
 import Loading from '../Loading';
+
+import Home from '../../pages/home/Home';
+import LibraryList from '../../pages/library/List';
 
 const StyledContent = styled(Layout.Content)`
   height: 100%;
@@ -22,10 +23,8 @@ const Content = () => {
     <>
       {loading && <Loading />}
       <StyledContent>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/about" component={About} />
-        </Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/library/list" component={LibraryList} />
       </StyledContent>
     </>
   );

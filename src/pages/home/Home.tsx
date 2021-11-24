@@ -1,9 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Title = styled.h3`
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+`;
 
 const Home = () => {
   return (
     <>
-      <div>You can now view document_library_front in the browser.</div>
+      <Title>홈</Title>
     </>
   );
 };
