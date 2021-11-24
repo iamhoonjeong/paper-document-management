@@ -10,6 +10,8 @@ const StyledHeader = styled(Layout.Header)`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
+  z-index: 100;
 `;
 
 const StyledAvatar = styled(Avatar)`
