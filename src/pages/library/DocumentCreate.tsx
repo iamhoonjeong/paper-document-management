@@ -4,6 +4,7 @@ import { Input, Button, Slider, InputNumber } from 'antd';
 import { SwapOutlined } from '@ant-design/icons';
 
 import PageTitle from '../../components/PageTitle';
+import PageSubTitle from '../../components/PageSubTitle';
 
 const DocumentCreate = () => {
   const [inputValue, setInputValue] = useState(1);
@@ -11,26 +12,27 @@ const DocumentCreate = () => {
   const onChange = (value: any) => {
     setInputValue(value);
   };
+
   return (
     <>
       <PageTitle>문서 만들기</PageTitle>
       <Wrap>
         <SetTitleArea>
-          <SubTitle>문서 이름</SubTitle>
+          <PageSubTitle>문서 이름</PageSubTitle>
           <StyledInput placeholder="문서 이름 입력" />
           <StyledButton type="primary">확인</StyledButton>
         </SetTitleArea>
         <SetContentArea>
           <ContentToolArea>
             <ToolWrap>
-              <SubTitle>필드 추가</SubTitle>
+              <PageSubTitle>필드 추가</PageSubTitle>
               <ToolCenterWrap>
                 <StyledToolButton>필드 추가</StyledToolButton>
                 <StyledToolButton>체크박스 추가</StyledToolButton>
               </ToolCenterWrap>
             </ToolWrap>
             <ToolWrap>
-              <SubTitle>문서 확대/축소</SubTitle>
+              <PageSubTitle>문서 확대/축소</PageSubTitle>
               <ToolCenterWrap>
                 <StyledSlider
                   min={0}
@@ -55,7 +57,7 @@ const DocumentCreate = () => {
             </ContentLeft>
             <ContentRight>
               <FieldContentsWrap>
-                <SubTitle>필드 레이어</SubTitle>
+                <PageSubTitle>필드 레이어</PageSubTitle>
                 <FieldWrap>
                   <FieldHeaderWrap>
                     <FieldTitle>
@@ -172,12 +174,6 @@ const ToolWrap = styled.div`
   display: flex;
   flex-direction: column;
   padding-right: 24px;
-`;
-
-const SubTitle = styled.div`
-  font-weight: bold;
-  font-size: 14px;
-  min-width: 56px;
 `;
 
 const ToolCenterWrap = styled.div`

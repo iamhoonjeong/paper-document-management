@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import '../../node_modules/antd/dist/antd.css';
+import 'antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -12,7 +12,6 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: 'Noto Sans KR', sans-serif;
-    /* font-size: 1rem; */
     box-sizing: border-box;
   }
 

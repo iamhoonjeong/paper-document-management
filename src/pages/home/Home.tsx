@@ -1,11 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Title = styled.h3`
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0;
-`;
+import PageTitle from '../../components/PageTitle';
+import PageSubTitle from '../../components/PageSubTitle';
+
+const Home = () => {
+  return (
+    <>
+      <PageTitle>홈</PageTitle>
+      <CardWrap>
+        <Card>
+          <PageSubTitle>네트워크</PageSubTitle>
+        </Card>
+        <Card>
+          <PageSubTitle>네트워크</PageSubTitle>
+        </Card>
+        <Card>
+          <PageSubTitle>네트워크</PageSubTitle>
+        </Card>
+        <Card>
+          <PageSubTitle>네트워크</PageSubTitle>
+        </Card>
+      </CardWrap>
+    </>
+  );
+};
+
+export default Home;
 
 const CardWrap = styled.div`
   margin-top: 20px;
@@ -23,32 +44,3 @@ const Card = styled.div`
   background-color: #fff;
   padding: 20px;
 `;
-
-const CardTitle = styled.p`
-  font-size: 14px;
-  font-weight: bold;
-`;
-
-const Home = () => {
-  return (
-    <>
-      <Title>홈</Title>
-      <CardWrap>
-        <Card>
-          <CardTitle>네트워크</CardTitle>
-        </Card>
-        <Card>
-          <CardTitle>네트워크</CardTitle>
-        </Card>
-        <Card>
-          <CardTitle>네트워크</CardTitle>
-        </Card>
-        <Card>
-          <CardTitle>네트워크</CardTitle>
-        </Card>
-      </CardWrap>
-    </>
-  );
-};
-
-export default Home;

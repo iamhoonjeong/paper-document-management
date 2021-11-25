@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../modules';
+import { RootState } from '../../store';
 
 import Loading from '../Loading';
 
