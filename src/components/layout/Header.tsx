@@ -31,7 +31,12 @@ const Header = () => {
 
   return (
     <StyledHeader className="site-layout-background">
-      <div onClick={onLoad}>새로고침</div>
+      <div
+        onClick={onLoad}
+        style={{ whiteSpace: 'nowrap', marginRight: '8px' }}
+      >
+        새로고침
+      </div>
       <div>
         <StyledAvatar>
           <UserOutlined style={{ fontSize: '16px' }} />
