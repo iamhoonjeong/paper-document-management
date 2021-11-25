@@ -9,11 +9,12 @@ import Loading from '../Loading';
 
 import Home from '../../pages/home/Home';
 import LibraryList from '../../pages/library/List';
+import DocumentCreate from '../../pages/library/DocumentCreate';
 
 const StyledContent = styled(Layout.Content)`
   height: 100%;
   overflow-y: scroll;
-  padding: 20px 30px 50px;
+  padding: 20px 30px 30px;
 `;
 
 const Content = () => {
@@ -25,6 +26,7 @@ const Content = () => {
       <StyledContent>
         <Route path="/" exact component={Home} />
         <Route path="/library/list" component={LibraryList} />
+        <Route path="/library/document/create" component={DocumentCreate} />
       </StyledContent>
     </>
   );
