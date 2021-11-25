@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Button, Table } from 'antd';
+
+import PageTitle from '../../components/PageTitle';
 
 const List = () => {
   const columns = [
@@ -54,9 +57,12 @@ const List = () => {
 
   return (
     <>
-      <Title>문서 목록</Title>
+      <PageTitle>문서 목록</PageTitle>
       <ButtonWrap>
-        <CreateButton type="primary">문서 생성</CreateButton>
+        <CreateButton type="primary">
+          <Link to="/library/document/create">문서 만들기</Link>
+        </CreateButton>
+
         <CreateButton type="default">문서 다운로드</CreateButton>
       </ButtonWrap>
       <Table
@@ -70,12 +76,6 @@ const List = () => {
 };
 
 export default List;
-
-const Title = styled.h3`
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0;
-`;
 
 const ButtonWrap = styled.div`
   display: flex;

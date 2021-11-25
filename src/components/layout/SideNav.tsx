@@ -54,6 +54,9 @@ const SideNav = () => {
           <Item key="2">
             <Link to="/library/list">문서 목록</Link>
           </Item>
+          <Item key="3">
+            <Link to="/library/document/create">문서 만들기</Link>
+          </Item>
         </SubMenu>
       </Menu>
     </Layout.Sider>
