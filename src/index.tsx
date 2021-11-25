@@ -8,7 +8,7 @@ import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import rootReducer from './modules';
+import rootReducer from './store';
 import GlobalStyle from './styles/global-styled';
 import theme from './styles/theme';
 

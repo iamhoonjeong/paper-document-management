@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Layout, Avatar } from 'antd';
 import { useDispatch } from 'react-redux';
-import { setLoading } from '../../modules/loading';
+import { setLoading } from '../../store/loading';
 import { UserOutlined } from '@ant-design/icons';
 
 const StyledHeader = styled(Layout.Header)`
