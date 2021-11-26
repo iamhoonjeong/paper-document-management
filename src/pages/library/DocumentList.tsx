@@ -5,7 +5,7 @@ import { Button, Table } from 'antd';
 
 import PageTitle from '../../components/PageTitle';
 
-const List = () => {
+const DocumentList = () => {
   const columns = [
     {
       title: '문서 ID',
@@ -62,7 +62,6 @@ const List = () => {
         <CreateButton type="primary">
           <Link to="/library/document/create">문서 만들기</Link>
         </CreateButton>
-
         <CreateButton type="default">문서 다운로드</CreateButton>
       </ButtonWrap>
       <Table
@@ -75,7 +74,7 @@ const List = () => {
   );
 };
 
-export default List;
+export default DocumentList;
 
 const ButtonWrap = styled.div`
   display: flex;
