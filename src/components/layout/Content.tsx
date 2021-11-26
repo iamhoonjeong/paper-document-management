@@ -8,7 +8,7 @@ import { RootState } from '../../store';
 import Loading from '../Loading';
 
 import Home from '../../pages/home/Home';
-import LibraryList from '../../pages/library/List';
+import DocumentList from '../../pages/library/DocumentList';
 import DocumentCreate from '../../pages/library/DocumentCreate';
 
 const StyledContent = styled(Layout.Content)`
@@ -25,7 +25,7 @@ const Content = () => {
       {loading && <Loading />}
       <StyledContent>
         <Route path="/" exact component={Home} />
-        <Route path="/library/list" component={LibraryList} />
+        <Route path="/library/list" component={DocumentList} />
         <Route path="/library/document/create" component={DocumentCreate} />
       </StyledContent>
     </>
