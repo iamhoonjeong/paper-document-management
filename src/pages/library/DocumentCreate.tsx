@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 import PageTitle from '../../components/PageTitle';
 
-import TitleWrap from './components/documentCreate/TitleWrap';
-import ToolWrap from './components/documentCreate/ToolWrap';
-import FieldWrap from './components/documentCreate/FieldWrap';
-import Field from './components/documentCreate/Field';
-import Buttons from './components/documentCreate/Buttons';
+import TitleWrap from './components/document/TitleWrap';
+import ToolWrap from './components/document/ToolWrap';
+import Canvas from './components/document/Canvas';
+import FieldWrap from './components/document/FieldWrap';
+import Field from './components/document/Field';
+import Buttons from './components/document/Buttons';
 
 const DocumentCreate = () => {
   return (
@@ -19,7 +20,10 @@ const DocumentCreate = () => {
           <ToolWrap />
           <ContentWrap>
             <ContentsLeft>
-              <DocumentViewWrap />
+              <CanvasWrap id="canvas-wrap">
+                <Canvas />
+              </CanvasWrap>
+              <CanvasWrapCornerBox />
             </ContentsLeft>
             <ContentsRight>
               <FieldWrap>
@@ -77,6 +81,7 @@ const ContentsLeft = styled.div`
   border-right: 1px solid #e2e2e2;
   padding: 20px 20px 0 0;
   overflow: scroll;
+  position: relative;
 `;
 
 const ContentsRight = styled.div`
@@ -88,8 +93,31 @@ const ContentsRight = styled.div`
   justify-content: space-between;
 `;
 
-const DocumentViewWrap = styled.div`
+const CanvasWrap = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
-  border: 1px solid #e2e2e2;
+  /* border: 1px solid #e2e2e2; */
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background-color: #f1f3f5;
+    opacity: 0.3;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #868e96;
+    border-radius: 4px;
+  }
+`;
+
+const CanvasWrapCornerBox = styled.div`
+  width: 7px;
+  height: 7px;
+  background-color: #f1f3f5;
+  position: absolute;
+  right: 20px;
+  bottom: 0;
 `;

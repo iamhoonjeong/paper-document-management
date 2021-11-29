@@ -10,16 +10,16 @@ const Home = () => {
       <PageTitle>홈</PageTitle>
       <CardWrap>
         <Card>
-          <PageSubTitle>네트워크</PageSubTitle>
+          <PageSubTitle title="네트워크" />
         </Card>
         <Card>
-          <PageSubTitle>네트워크</PageSubTitle>
+          <PageSubTitle title="네트워크" />
         </Card>
         <Card>
-          <PageSubTitle>네트워크</PageSubTitle>
+          <PageSubTitle title="네트워크" />
         </Card>
         <Card>
-          <PageSubTitle>네트워크</PageSubTitle>
+          <PageSubTitle title="네트워크" />
         </Card>
       </CardWrap>
     </>

@@ -78,7 +78,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-table {
     font-size: 12px;
-    min-width: 392px;
+    overflow: scroll;
   }
 
   .ant-table-thead > tr > th {
