@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, Slider, InputNumber } from 'antd';
+import { Button, Slider, InputNumber, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 
 const ToolWrap = () => {
-  const [inputValue, setInputValue] = useState(1);
+  const [inputValue, setInputValue] = useState(100);
 
   const onChange = (value: any) => {
     setInputValue(value);
@@ -14,14 +15,24 @@ const ToolWrap = () => {
   return (
     <StyledToolWrap>
       <Tool>
-        <PageSubTitle>필드 추가</PageSubTitle>
+        <PageSubTitle title="필드 추가" />
         <ToolCenterWrap>
           <StyledToolButton>필드 추가</StyledToolButton>
           <StyledToolButton>체크박스 추가</StyledToolButton>
         </ToolCenterWrap>
       </Tool>
       <Tool>
-        <PageSubTitle>문서 확대/축소</PageSubTitle>
+        <PageSubTitle title="문서 추가" desc="jpg, png" />
+        <ToolCenterWrap>
+          <Upload>
+            <StyledToolButton icon={<UploadOutlined />}>
+              이미지 업로드
+            </StyledToolButton>
+          </Upload>
+        </ToolCenterWrap>
+      </Tool>
+      <Tool>
+        <PageSubTitle title="문서 확대/축소" />
         <ToolCenterWrap>
           <StyledSlider
             min={0}
@@ -47,7 +58,7 @@ export default ToolWrap;
 
 const StyledToolWrap = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   min-width: 400px;
   height: 90px;

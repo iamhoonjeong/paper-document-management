@@ -90,7 +90,7 @@ const CreateButton = styled(Button)`
 
 const ModifyButton = styled(Button)`
   width: 48px;
-  height: 22px;
+  height: 26px;
   font-size: 12px;
   padding: 0;
 `;

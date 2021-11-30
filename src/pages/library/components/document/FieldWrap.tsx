@@ -6,7 +6,7 @@ import PageSubTitle from '../../../../components/PageSubTitle';
 const FieldWrap = ({ children }: { children: React.ReactNode }) => {
   return (
     <StyledFieldWrap>
-      <PageSubTitle>필드 레이어</PageSubTitle>
+      <PageSubTitle title="필드 레이어" />
       {children}
     </StyledFieldWrap>
   );

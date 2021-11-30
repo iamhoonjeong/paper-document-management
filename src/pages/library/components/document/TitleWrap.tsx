@@ -7,7 +7,7 @@ import PageSubTitle from '../../../../components/PageSubTitle';
 const TitleArea = () => {
   return (
     <SetTitleArea>
-      <PageSubTitle>문서 이름</PageSubTitle>
+      <PageSubTitle title="문서 이름" />
       <StyledInput placeholder="문서 이름 입력" />
       <StyledButton type="primary">확인</StyledButton>
     </SetTitleArea>
