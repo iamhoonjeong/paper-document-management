@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, Slider, InputNumber } from 'antd';
+import { Button, Slider, InputNumber, Upload } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 
@@ -23,7 +24,11 @@ const ToolWrap = () => {
       <Tool>
         <PageSubTitle title="문서 추가" desc="jpg, png" />
         <ToolCenterWrap>
-          <StyledToolButton>이미지 업로드</StyledToolButton>
+          <Upload>
+            <StyledToolButton icon={<UploadOutlined />}>
+              이미지 업로드
+            </StyledToolButton>
+          </Upload>
         </ToolCenterWrap>
       </Tool>
       <Tool>
