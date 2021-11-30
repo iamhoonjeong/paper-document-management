@@ -6,3 +6,5 @@ export type LoadingAction = ActionType<typeof actions>;
 export type Loading = {
   onLoading: boolean;
 };
+
+export type LoadingState = Loading;

@@ -29,20 +29,6 @@ const DocumentCreate = () => {
               <FieldWrap>
                 <Field />
                 <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
-                <Field />
               </FieldWrap>
               <Buttons />
             </ContentsRight>

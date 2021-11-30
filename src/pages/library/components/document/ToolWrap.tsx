@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { setZoomValue } from '../../../../store/zoomValue';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 
 const ToolWrap = () => {
+  const dispatch = useDispatch();
+
   const [inputValue, setInputValue] = useState(100);
 
   const onChange = (value: any) => {
     setInputValue(value);
+    dispatch(setZoomValue(value));
   };
 
   return (
@@ -54,7 +59,7 @@ const ToolWrap = () => {
   );
 };
 
-export default ToolWrap;
+export default React.memo(ToolWrap);
 
 const StyledToolWrap = styled.div`
   display: grid;
