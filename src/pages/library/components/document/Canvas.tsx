@@ -1,22 +1,54 @@
-import React, { useEffect } from 'react';
+/* eslint-disable */
+import React, { useState, useEffect } from 'react';
 import { fabric } from 'fabric';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
 
 const Canvas = () => {
+  let width = 2230;
+  let height = 3508;
+  let canvasContainer = document.querySelector('.canvas-container');
+  const zoomValue = useSelector(
+    (state: RootState) => state.zoomValue.value / 100,
+  );
+
+  // set canvas
+  const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   useEffect(() => {
-    let canvas = new fabric.Canvas('canvas');
+    setCanvas(
+      new fabric.Canvas('canvas', {
+        backgroundColor: '#e2e2e2',
+      }),
+    );
+  }, []);
 
-    // canvas.setWidth(width - 250 - 12 || 0);
-    // canvas.setHeight(canvasWrap?.offsetHeight || 0);
-    canvas.setWidth(2480 - 250 || 0);
-    canvas.setHeight(3508 || 0);
+  // zoom & out action
+  useEffect(() => {
+    width = width * zoomValue;
+    height = height * zoomValue;
 
-    // let canvasWrap: HTMLElement | null = document.querySelector('#canvas-wrap');
-    // let width: number = canvasWrap?.offsetWidth || 0;
+    const lowerCanvas = document.querySelector('.lower-canvas');
+    const upperCanvas = document.querySelector('.upper-canvas');
 
-    // let img = fabric.Image.fromURL('/images/temp.png', (img) => {
-    //   console.log(img);
-    //   canvas.add(img);
-    // });
+    canvasContainer?.setAttribute(
+      'style',
+      `width: ${width}px; height: ${height}px; position: relative; user-select: none`,
+    );
+    lowerCanvas?.setAttribute(
+      'style',
+      `position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; touch-action: none; user-select: none`,
+    );
+    upperCanvas?.setAttribute(
+      'style',
+      `position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default`,
+    );
+  }, [zoomValue]);
+
+  // canvas elements
+  useEffect(() => {
+    canvas?.setWidth(width);
+    canvas?.setHeight(height);
+
     let text = new fabric.Text('Field', { left: 100, top: 100 });
     let rect = new fabric.Rect({
       left: 0,
@@ -25,15 +57,18 @@ const Canvas = () => {
       width: 100,
       height: 100,
     });
-
-    canvas.on('mouse:up', (options: any) => {
+    canvas?.on('mouse:up', (options: any) => {
       if (options) {
         console.log(options.target);
       }
     });
+    canvas?.add(rect, text);
+    canvas?.renderAll();
+  }, [canvas]);
 
-    canvas.add(rect, text);
-  });
+  // inside canvas container canvas width, height 100%
+  useEffect(() => {}, [zoomValue, canvas]);
+
   return (
     <>
       <canvas id="canvas"></canvas>
