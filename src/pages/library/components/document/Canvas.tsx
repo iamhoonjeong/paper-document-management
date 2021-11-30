@@ -4,6 +4,8 @@ import { fabric } from 'fabric';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../store';
 
+import img from './img.png';
+
 const Canvas = () => {
   let width = 2230;
   let height = 3508;
@@ -49,6 +51,13 @@ const Canvas = () => {
     canvas?.setWidth(width);
     canvas?.setHeight(height);
 
+    // background image setting
+    canvas?.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+      scaleX: width / 1000,
+      scaleY: height / 800,
+    });
+
+    console.log(img);
     let text = new fabric.Text('Field', { left: 100, top: 100 });
     let rect = new fabric.Rect({
       left: 0,
