@@ -44,7 +44,6 @@ const DocumentList = () => {
     selectedRowKeys: [],
   });
   const onSelectChange = (selectedRowKeys: any) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setState({ selectedRowKeys });
   };
 

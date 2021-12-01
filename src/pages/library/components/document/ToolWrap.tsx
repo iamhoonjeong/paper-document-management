@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Button, Slider, InputNumber, Upload } from 'antd';
+import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
-import { setZoomValue } from '../../../../store/zoomValue';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCanvasImage, setZoomValue } from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
+import { RootState } from '../../../../store';
 
 const ToolWrap = () => {
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState(100);
-
+  const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue);
   const onChange = (value: any) => {
-    setInputValue(value);
     dispatch(setZoomValue(value));
+  };
+
+  const props = {
+    beforeUpload: (file: any) => {
+      if (file.type === 'image/jpeg' || file.type === 'image/png') {
+        dispatch(setCanvasImage(file));
+        return Upload.LIST_IGNORE;
+      } else {
+        message.error(`jpg, png 파일만 업로드할 수 있습니다.`);
+        return Upload.LIST_IGNORE;
+      }
+    },
+    onChange: (info: any) => {},
   };
 
   return (
@@ -29,7 +41,7 @@ const ToolWrap = () => {
       <Tool>
         <PageSubTitle title="문서 추가" desc="jpg, png" />
         <ToolCenterWrap>
-          <Upload>
+          <Upload {...props}>
             <StyledToolButton icon={<UploadOutlined />}>
               이미지 업로드
             </StyledToolButton>
@@ -43,14 +55,14 @@ const ToolWrap = () => {
             min={0}
             max={300}
             onChange={onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
+            value={typeof zoomValue === 'number' ? zoomValue : 0}
           />
 
           <StyledInputNumber
             min={0}
             max={300}
             style={{ margin: '0 16px' }}
-            value={inputValue}
+            value={zoomValue}
             onChange={onChange}
           />
         </ToolCenterWrap>
@@ -59,7 +71,7 @@ const ToolWrap = () => {
   );
 };
 
-export default React.memo(ToolWrap);
+export default ToolWrap;
 
 const StyledToolWrap = styled.div`
   display: grid;
