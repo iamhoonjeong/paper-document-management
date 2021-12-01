@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Button, Slider, InputNumber, Upload } from 'antd';
+import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { setZoomValue } from '../../../../store/zoomValue';
+import { setCanvasImage } from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 
@@ -11,10 +12,22 @@ const ToolWrap = () => {
   const dispatch = useDispatch();
 
   const [inputValue, setInputValue] = useState(100);
-
   const onChange = (value: any) => {
     setInputValue(value);
     dispatch(setZoomValue(value));
+  };
+
+  const props = {
+    beforeUpload: (file: any) => {
+      if (file.type === 'image/jpeg' || file.type === 'image/png') {
+        dispatch(setCanvasImage(file));
+        return Upload.LIST_IGNORE;
+      } else {
+        message.error(`jpg, png 파일만 업로드할 수 있습니다.`);
+        return Upload.LIST_IGNORE;
+      }
+    },
+    onChange: (info: any) => {},
   };
 
   return (
@@ -29,7 +42,7 @@ const ToolWrap = () => {
       <Tool>
         <PageSubTitle title="문서 추가" desc="jpg, png" />
         <ToolCenterWrap>
-          <Upload>
+          <Upload {...props}>
             <StyledToolButton icon={<UploadOutlined />}>
               이미지 업로드
             </StyledToolButton>
@@ -55,6 +68,9 @@ const ToolWrap = () => {
           />
         </ToolCenterWrap>
       </Tool>
+      {/* <div onClick={onClick} id="pictures">
+        ok
+      </div> */}
     </StyledToolWrap>
   );
 };

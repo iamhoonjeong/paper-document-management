@@ -7,6 +7,8 @@ import { RootState } from '../../../../store';
 import img from './img.png';
 
 const Canvas = () => {
+  const canvasImage = useSelector((state: RootState) => state.canvas.image);
+
   let width = 2230;
   let height = 3508;
   let canvasContainer = document.querySelector('.canvas-container');
@@ -51,13 +53,6 @@ const Canvas = () => {
     canvas?.setWidth(width);
     canvas?.setHeight(height);
 
-    // background image setting
-    canvas?.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
-      scaleX: width / 1000,
-      scaleY: height / 800,
-    });
-
-    console.log(img);
     let text = new fabric.Text('Field', { left: 100, top: 100 });
     let rect = new fabric.Rect({
       left: 0,
@@ -74,6 +69,24 @@ const Canvas = () => {
     canvas?.add(rect, text);
     canvas?.renderAll();
   }, [canvas]);
+
+  // background image setting
+  useEffect(() => {
+    if (canvasImage) {
+      let reader: any = new FileReader();
+      reader.readAsDataURL(canvasImage);
+      reader.onloadend = () => {
+        canvas?.setBackgroundImage(
+          reader.result,
+          canvas.renderAll.bind(canvas),
+          {
+            scaleX: width / 1000,
+            scaleY: height / 800,
+          },
+        );
+      };
+    }
+  }, [canvasImage]);
 
   // inside canvas container canvas width, height 100%
   useEffect(() => {}, [zoomValue, canvas]);
