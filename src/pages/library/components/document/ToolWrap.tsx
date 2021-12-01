@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
-import { setZoomValue } from '../../../../store/zoomValue';
-import { setCanvasImage } from '../../../../store/canvas';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCanvasImage, setZoomValue } from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
+import { RootState } from '../../../../store';
 
 const ToolWrap = () => {
   const dispatch = useDispatch();
 
-  const [inputValue, setInputValue] = useState(100);
+  const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue);
   const onChange = (value: any) => {
-    setInputValue(value);
     dispatch(setZoomValue(value));
   };
 
@@ -56,26 +55,23 @@ const ToolWrap = () => {
             min={0}
             max={300}
             onChange={onChange}
-            value={typeof inputValue === 'number' ? inputValue : 0}
+            value={typeof zoomValue === 'number' ? zoomValue : 0}
           />
 
           <StyledInputNumber
             min={0}
             max={300}
             style={{ margin: '0 16px' }}
-            value={inputValue}
+            value={zoomValue}
             onChange={onChange}
           />
         </ToolCenterWrap>
       </Tool>
-      {/* <div onClick={onClick} id="pictures">
-        ok
-      </div> */}
     </StyledToolWrap>
   );
 };
 
-export default React.memo(ToolWrap);
+export default ToolWrap;
 
 const StyledToolWrap = styled.div`
   display: grid;
