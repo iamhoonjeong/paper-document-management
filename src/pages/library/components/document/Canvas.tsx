@@ -30,7 +30,7 @@ const Canvas = () => {
   useEffect(() => {
     setCanvas(
       new fabric.Canvas('canvas', {
-        backgroundColor: '#e2e2e2',
+        backgroundColor: '#fff',
       }),
     );
   }, []);

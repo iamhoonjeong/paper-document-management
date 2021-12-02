@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 import PageTitle from '../../components/PageTitle';
 
@@ -10,7 +11,6 @@ import Canvas from './components/document/Canvas';
 import FieldWrap from './components/document/FieldWrap';
 import Field from './components/document/Field';
 import Buttons from './components/document/Buttons';
-import { RootState } from '../../store';
 
 const DocumentCreate = () => {
   const Fields = useSelector((state: RootState) => state.canvas.fields);
@@ -88,7 +88,6 @@ const CanvasWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* border: 1px solid #e2e2e2; */
   overflow: scroll;
 
   &::-webkit-scrollbar {
