@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 import PageTitle from '../../components/PageTitle';
 
@@ -9,8 +10,11 @@ import Canvas from './components/document/Canvas';
 import FieldWrap from './components/document/FieldWrap';
 import Field from './components/document/Field';
 import Buttons from './components/document/Buttons';
+import { RootState } from '../../store';
 
 const DocumentCreate = () => {
+  const Fields = useSelector((state: RootState) => state.canvas.fields);
+
   return (
     <>
       <PageTitle>문서 만들기</PageTitle>
@@ -27,8 +31,9 @@ const DocumentCreate = () => {
             </ContentsLeft>
             <ContentsRight>
               <FieldWrap>
-                <Field />
-                <Field />
+                {Fields.map((el: any, i: any) => {
+                  return <Field key={i} titleNumber={i + 1} />;
+                })}
               </FieldWrap>
               <Buttons />
             </ContentsRight>
