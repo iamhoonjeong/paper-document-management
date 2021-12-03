@@ -53,7 +53,7 @@ const Wrap = styled.div`
 
 const ContentsWrap = styled.div`
   width: 100%;
-  height: 820px;
+  height: calc(100vh - 114px);
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
