@@ -23,13 +23,14 @@ const Canvas = () => {
   const zoomValue = useSelector(
     (state: RootState) => state.canvas.zoomValue / 100,
   );
+  const Fields = useSelector((state: RootState) => state.canvas.fields);
 
   // set canvas
   const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   useEffect(() => {
     setCanvas(
       new fabric.Canvas('canvas', {
-        backgroundColor: '#e2e2e2',
+        backgroundColor: '#fff',
       }),
     );
   }, []);
@@ -67,22 +68,6 @@ const Canvas = () => {
   useEffect(() => {
     canvas?.setWidth(canvasWidth);
     canvas?.setHeight(canvasHeight);
-
-    let text = new fabric.Text('Field', { left: 100, top: 100 });
-    let rect = new fabric.Rect({
-      left: 0,
-      top: 0,
-      fill: 'green',
-      width: 100,
-      height: 100,
-    });
-    canvas?.on('mouse:up', (options: any) => {
-      if (options) {
-        console.log(options.target);
-      }
-    });
-    canvas?.add(rect, text);
-    canvas?.renderAll();
   }, [canvas]);
 
   // zoom & out action
@@ -106,6 +91,21 @@ const Canvas = () => {
       `position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default`,
     );
   }, [zoomValue]);
+
+  // insert fields
+  useEffect(() => {
+    let rect = new fabric.Rect({
+      left: 20,
+      top: 20,
+      fill: 'green',
+      width: 100,
+      height: 100,
+    });
+    canvas?.add(rect);
+
+    let json = JSON.stringify(canvas);
+    console.log(json);
+  }, [Fields]);
 
   return (
     <>

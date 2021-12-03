@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCanvasImage, setZoomValue } from '../../../../store/canvas';
+import {
+  setCanvasImage,
+  setZoomValue,
+  insertField,
+} from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 import { RootState } from '../../../../store';
@@ -34,7 +38,9 @@ const ToolWrap = () => {
       <Tool>
         <PageSubTitle title="필드 추가" />
         <ToolCenterWrap>
-          <StyledToolButton>필드 추가</StyledToolButton>
+          <StyledToolButton onClick={() => dispatch(insertField('insert'))}>
+            필드 추가
+          </StyledToolButton>
           <StyledToolButton>체크박스 추가</StyledToolButton>
         </ToolCenterWrap>
       </Tool>

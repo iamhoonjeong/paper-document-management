@@ -11,12 +11,6 @@ import Home from '../../pages/home/Home';
 import DocumentList from '../../pages/library/DocumentList';
 import DocumentCreate from '../../pages/library/DocumentCreate';
 
-const StyledContent = styled(Layout.Content)`
-  height: 100%;
-  overflow-y: scroll;
-  padding: 20px 30px 30px;
-`;
-
 const Content = () => {
   const loading = useSelector((state: RootState) => state.loading.onLoading);
 
@@ -33,3 +27,9 @@ const Content = () => {
 };
 
 export default Content;
+
+const StyledContent = styled(Layout.Content)`
+  height: 100%;
+  overflow-y: scroll;
+  padding: 20px 30px 30px;
+`;

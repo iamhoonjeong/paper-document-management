@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import { Input, Button } from 'antd';
 import { SwapOutlined } from '@ant-design/icons';
 
-const Field = () => {
+type FieldProps = {
+  titleNumber: number;
+};
+
+const Field = ({ titleNumber }: FieldProps) => {
   return (
     <StyledField>
       <FieldHeaderWrap>
         <FieldTitle>
           <FieldIcon />
-          필드 01
+          필드 {titleNumber}
         </FieldTitle>
         <FieldDeleteButton danger>삭제</FieldDeleteButton>
       </FieldHeaderWrap>

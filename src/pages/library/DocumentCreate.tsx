@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 import PageTitle from '../../components/PageTitle';
 
@@ -11,6 +13,8 @@ import Field from './components/document/Field';
 import Buttons from './components/document/Buttons';
 
 const DocumentCreate = () => {
+  const Fields = useSelector((state: RootState) => state.canvas.fields);
+
   return (
     <>
       <PageTitle>문서 만들기</PageTitle>
@@ -27,8 +31,9 @@ const DocumentCreate = () => {
             </ContentsLeft>
             <ContentsRight>
               <FieldWrap>
-                <Field />
-                <Field />
+                {Fields.map((el: any, i: any) => {
+                  return <Field key={i} titleNumber={i + 1} />;
+                })}
               </FieldWrap>
               <Buttons />
             </ContentsRight>
@@ -48,7 +53,7 @@ const Wrap = styled.div`
 
 const ContentsWrap = styled.div`
   width: 100%;
-  height: 820px;
+  height: calc(100vh - 114px);
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
@@ -83,7 +88,6 @@ const CanvasWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* border: 1px solid #e2e2e2; */
   overflow: scroll;
 
   &::-webkit-scrollbar {

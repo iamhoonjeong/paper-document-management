@@ -8,6 +8,7 @@ export type Canvas = {
   image: any;
   width: number;
   height: number;
+  fields: any;
 };
 
 export type CanvasState = Canvas;
