@@ -16,7 +16,7 @@ const Canvas = () => {
   let canvasHeightProps = useSelector((state: RootState) => state.canvas.height);
   const canvasImage = useSelector((state: RootState) => state.canvas.image);
   const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue / 100);
-  const Fields = useSelector((state: RootState) => state.canvas.fields);
+  const fields = useSelector((state: RootState) => state.canvas.fields);
 
   // set canvas
   const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
@@ -56,14 +56,23 @@ const Canvas = () => {
 
   // canvas settings
   useEffect(() => {
+    fabric.Group.prototype.hasControls = false;
     canvas?.setWidth(canvasWidth);
     canvas?.setHeight(canvasHeight);
 
     // canvas events
     canvas?.on('before:selection:cleared', (options: any) => {
-      console.log(options.target);
-      console.log('width:', Math.round(options.target?.width * options.target?.zoomX));
-      console.log('height:', Math.round(options.target?.height * options.target?.zoomY));
+      // element sizes
+      // console.log('width:', Math.round(options.target?.width * options.target?.zoomX));
+      // console.log('height:', Math.round(options.target?.height * options.target?.zoomY));
+      //
+      // convert json
+      // let json = JSON.stringify(canvas);
+      // console.log(json);
+    });
+
+    canvas?.on('selection:created', (options: any) => {
+      // console.log(options.selected);
     });
   }, [canvas]);
 
@@ -94,27 +103,21 @@ const Canvas = () => {
     let rect = new fabric.Rect({
       width: 100,
       height: 100,
-      left: 20,
-      top: 20,
+      left: 0,
+      top: 0,
       fill: 'rgba(25, 144, 255, 0.3)',
       borderScaleFactor: 2,
       borderDashArray: [5, 5],
       borderColor: 'red',
       cornerColor: '#1990ff',
-      cornerSize: 8,
+      cornerSize: 6,
       transparentCorners: false,
       lockRotation: true,
-
-      // stroke: 'red',
-      // strokeWidth: 1,
-      // strokeDashArray: [5, 5],
     });
 
     canvas?.add(rect);
-
-    // let json = JSON.stringify(canvas);
-    // console.log(json);
-  }, [Fields]);
+    canvas?.renderAll();
+  }, [fields]);
 
   return (
     <>
