@@ -41,7 +41,7 @@ const ToolWrap = () => {
           <StyledToolButton onClick={() => dispatch(insertField('insert'))}>
             필드 추가
           </StyledToolButton>
-          <StyledToolButton>체크박스 추가</StyledToolButton>
+          {/* <StyledToolButton>체크박스 추가</StyledToolButton> */}
         </ToolCenterWrap>
       </Tool>
       <Tool>
