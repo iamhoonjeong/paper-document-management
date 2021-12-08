@@ -63,12 +63,7 @@ const DocumentList = () => {
         </CreateButton>
         <CreateButton type="default">문서 다운로드</CreateButton>
       </ButtonWrap>
-      <Table
-        rowSelection={rowSelection}
-        columns={columns}
-        dataSource={data}
-        bordered
-      />
+      <Table rowSelection={rowSelection} columns={columns} dataSource={data} bordered />
     </>
   );
 };

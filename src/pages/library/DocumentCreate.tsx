@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 
 import PageTitle from '../../components/PageTitle';
-
 import TitleWrap from './components/document/TitleWrap';
 import ToolWrap from './components/document/ToolWrap';
 import Canvas from './components/document/Canvas';

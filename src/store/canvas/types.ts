@@ -4,6 +4,7 @@ import * as actions from './actions';
 export type CanvasAction = ActionType<typeof actions>;
 
 export type Canvas = {
+  canvas: any;
   zoomValue: number;
   image: any;
   width: number;

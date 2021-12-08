@@ -1,9 +1,9 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
-import { setCanvasWidth, setCanvasHeight } from '../../../../store/canvas/actions';
+import { setCanvas, setCanvasWidth, setCanvasHeight } from '../../../../store/canvas/actions';
 
 const Canvas = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const Canvas = () => {
   let canvasWidth = 0;
   let canvasHeight = 0;
 
+  let canvas = useSelector((state: RootState) => state.canvas.canvas);
   let canvasWidthProps = useSelector((state: RootState) => state.canvas.width);
   let canvasHeightProps = useSelector((state: RootState) => state.canvas.height);
   const canvasImage = useSelector((state: RootState) => state.canvas.image);
@@ -19,18 +20,34 @@ const Canvas = () => {
   const fields = useSelector((state: RootState) => state.canvas.fields);
 
   // set canvas
-  const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   useEffect(() => {
-    setCanvas(
-      new fabric.Canvas('canvas', {
-        backgroundColor: '#fff',
-        selectionColor: 'rgba(30, 35, 46, 0.3)',
-      }),
+    dispatch(
+      setCanvas(
+        new fabric.Canvas('canvas', {
+          backgroundColor: '#fff',
+          selectionColor: 'rgba(30, 35, 46, 0.3)',
+        }),
+      ),
     );
   }, []);
 
-  // background image setting
   useEffect(() => {
+    canvas?.setWidth(canvasWidth);
+    canvas?.setHeight(canvasHeight);
+  }, [canvas]);
+
+  // canvas & background image setting
+  useEffect(() => {
+    fabric.Group.prototype.hasControls = false;
+    fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
+    fabric.Object.prototype.transparentCorners = false;
+    fabric.Object.prototype.cornerColor = '#1990ff';
+    fabric.Object.prototype.lockRotation = true;
+    fabric.Object.prototype.cornerSize = 6;
+    fabric.Object.prototype.borderScaleFactor = 2;
+    fabric.Object.prototype.borderDashArray = [5, 5];
+    fabric.Object.prototype.borderColor = 'red';
+
     if (canvasImage) {
       let reader: any = new FileReader();
       reader.readAsDataURL(canvasImage);
@@ -52,29 +69,7 @@ const Canvas = () => {
         }, 0);
       };
     }
-  }, [canvas, canvasImage]);
-
-  // canvas settings
-  useEffect(() => {
-    fabric.Group.prototype.hasControls = false;
-    canvas?.setWidth(canvasWidth);
-    canvas?.setHeight(canvasHeight);
-
-    // canvas events
-    canvas?.on('before:selection:cleared', (options: any) => {
-      // element sizes
-      // console.log('width:', Math.round(options.target?.width * options.target?.zoomX));
-      // console.log('height:', Math.round(options.target?.height * options.target?.zoomY));
-      //
-      // convert json
-      // let json = JSON.stringify(canvas);
-      // console.log(json);
-    });
-
-    canvas?.on('selection:created', (options: any) => {
-      // console.log(options.selected);
-    });
-  }, [canvas]);
+  }, [canvasImage]);
 
   // zoom & out action
   useEffect(() => {
@@ -103,20 +98,13 @@ const Canvas = () => {
     let rect = new fabric.Rect({
       width: 100,
       height: 100,
-      left: 0,
-      top: 0,
+      left: 20,
+      top: 20,
       fill: 'rgba(25, 144, 255, 0.3)',
-      borderScaleFactor: 2,
-      borderDashArray: [5, 5],
-      borderColor: 'red',
-      cornerColor: '#1990ff',
-      cornerSize: 6,
-      transparentCorners: false,
-      lockRotation: true,
     });
 
     canvas?.add(rect);
-    canvas?.renderAll();
+    canvas?.setActiveObject(rect);
   }, [fields]);
 
   return (

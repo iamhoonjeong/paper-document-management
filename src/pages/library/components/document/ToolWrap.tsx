@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { RootState } from '../../../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCanvasImage, setZoomValue, insertField } from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
-import { RootState } from '../../../../store';
 
 const ToolWrap = () => {
   const dispatch = useDispatch();
 
+  let canvas = useSelector((state: RootState) => state.canvas.canvas);
   const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue);
+
   const onChange = (value: any) => {
     dispatch(setZoomValue(value));
   };
@@ -29,13 +31,23 @@ const ToolWrap = () => {
     onChange: (info: any) => {},
   };
 
+  const deleteField = useCallback(() => {
+    let fields: any = canvas?.getActiveObjects();
+
+    if (fields) {
+      for (let i = 0; i < fields.length; i++) {
+        canvas?.remove(fields[i]);
+      }
+    }
+  }, [canvas]);
+
   return (
     <StyledToolWrap>
       <Tool>
         <PageSubTitle title="필드 추가" />
         <ToolCenterWrap>
           <StyledToolButton onClick={() => dispatch(insertField('insert'))}>필드 추가</StyledToolButton>
-          {/* <StyledToolButton>체크박스 추가</StyledToolButton> */}
+          <StyledToolButton onClick={deleteField}>필드 삭제</StyledToolButton>
         </ToolCenterWrap>
       </Tool>
       <Tool>
