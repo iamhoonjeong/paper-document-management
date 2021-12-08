@@ -3,10 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
-import {
-  setCanvasWidth,
-  setCanvasHeight,
-} from '../../../../store/canvas/actions';
+import { setCanvasWidth, setCanvasHeight } from '../../../../store/canvas/actions';
 
 const Canvas = () => {
   const dispatch = useDispatch();
@@ -16,14 +13,10 @@ const Canvas = () => {
   let canvasHeight = 0;
 
   let canvasWidthProps = useSelector((state: RootState) => state.canvas.width);
-  let canvasHeightProps = useSelector(
-    (state: RootState) => state.canvas.height,
-  );
+  let canvasHeightProps = useSelector((state: RootState) => state.canvas.height);
   const canvasImage = useSelector((state: RootState) => state.canvas.image);
-  const zoomValue = useSelector(
-    (state: RootState) => state.canvas.zoomValue / 100,
-  );
-  const Fields = useSelector((state: RootState) => state.canvas.fields);
+  const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue / 100);
+  const fields = useSelector((state: RootState) => state.canvas.fields);
 
   // set canvas
   const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
@@ -31,6 +24,7 @@ const Canvas = () => {
     setCanvas(
       new fabric.Canvas('canvas', {
         backgroundColor: '#fff',
+        selectionColor: 'rgba(30, 35, 46, 0.3)',
       }),
     );
   }, []);
@@ -42,14 +36,10 @@ const Canvas = () => {
       reader.readAsDataURL(canvasImage);
 
       reader.onload = () => {
-        canvas?.setBackgroundImage(
-          reader.result,
-          canvas.renderAll.bind(canvas),
-          {
-            scaleX: 1,
-            scaleY: 1,
-          },
-        );
+        canvas?.setBackgroundImage(reader.result, canvas.renderAll.bind(canvas), {
+          scaleX: 1,
+          scaleY: 1,
+        });
 
         setTimeout(() => {
           let image = new Image();
@@ -64,10 +54,26 @@ const Canvas = () => {
     }
   }, [canvas, canvasImage]);
 
-  // canvas elements
+  // canvas settings
   useEffect(() => {
+    fabric.Group.prototype.hasControls = false;
     canvas?.setWidth(canvasWidth);
     canvas?.setHeight(canvasHeight);
+
+    // canvas events
+    canvas?.on('before:selection:cleared', (options: any) => {
+      // element sizes
+      // console.log('width:', Math.round(options.target?.width * options.target?.zoomX));
+      // console.log('height:', Math.round(options.target?.height * options.target?.zoomY));
+      //
+      // convert json
+      // let json = JSON.stringify(canvas);
+      // console.log(json);
+    });
+
+    canvas?.on('selection:created', (options: any) => {
+      // console.log(options.selected);
+    });
   }, [canvas]);
 
   // zoom & out action
@@ -95,17 +101,23 @@ const Canvas = () => {
   // insert fields
   useEffect(() => {
     let rect = new fabric.Rect({
-      left: 20,
-      top: 20,
-      fill: 'green',
       width: 100,
       height: 100,
+      left: 0,
+      top: 0,
+      fill: 'rgba(25, 144, 255, 0.3)',
+      borderScaleFactor: 2,
+      borderDashArray: [5, 5],
+      borderColor: 'red',
+      cornerColor: '#1990ff',
+      cornerSize: 6,
+      transparentCorners: false,
+      lockRotation: true,
     });
-    canvas?.add(rect);
 
-    let json = JSON.stringify(canvas);
-    console.log(json);
-  }, [Fields]);
+    canvas?.add(rect);
+    canvas?.renderAll();
+  }, [fields]);
 
   return (
     <>

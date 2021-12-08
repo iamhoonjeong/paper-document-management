@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setCanvasImage,
-  setZoomValue,
-  insertField,
-} from '../../../../store/canvas';
+import { setCanvasImage, setZoomValue, insertField } from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 import { RootState } from '../../../../store';
@@ -38,19 +34,15 @@ const ToolWrap = () => {
       <Tool>
         <PageSubTitle title="필드 추가" />
         <ToolCenterWrap>
-          <StyledToolButton onClick={() => dispatch(insertField('insert'))}>
-            필드 추가
-          </StyledToolButton>
-          <StyledToolButton>체크박스 추가</StyledToolButton>
+          <StyledToolButton onClick={() => dispatch(insertField('insert'))}>필드 추가</StyledToolButton>
+          {/* <StyledToolButton>체크박스 추가</StyledToolButton> */}
         </ToolCenterWrap>
       </Tool>
       <Tool>
         <PageSubTitle title="문서 추가" desc="jpg, png" />
         <ToolCenterWrap>
           <Upload {...props}>
-            <StyledToolButton icon={<UploadOutlined />}>
-              이미지 업로드
-            </StyledToolButton>
+            <StyledToolButton icon={<UploadOutlined />}>이미지 업로드</StyledToolButton>
           </Upload>
         </ToolCenterWrap>
       </Tool>
@@ -59,18 +51,12 @@ const ToolWrap = () => {
         <ToolCenterWrap>
           <StyledSlider
             min={0}
-            max={300}
+            max={500}
             onChange={onChange}
             value={typeof zoomValue === 'number' ? zoomValue : 0}
+            tooltipVisible={false}
           />
-
-          <StyledInputNumber
-            min={0}
-            max={300}
-            style={{ margin: '0 16px' }}
-            value={zoomValue}
-            onChange={onChange}
-          />
+          <StyledInputNumber min={0} max={500} style={{ margin: '0 16px' }} value={zoomValue} onChange={onChange} />
         </ToolCenterWrap>
       </Tool>
     </StyledToolWrap>
@@ -115,6 +101,7 @@ const StyledToolButton = styled(Button)`
 `;
 
 const StyledInputNumber = styled(InputNumber)`
-  width: 68px;
+  min-width: 62px;
+  width: 62px;
   font-size: 12px;
 `;
