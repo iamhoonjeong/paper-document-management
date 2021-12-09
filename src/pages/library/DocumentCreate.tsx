@@ -77,7 +77,7 @@ const ContentsLeft = styled.div`
 `;
 
 const ContentsRight = styled.div`
-  min-width: 380px;
+  min-width: 360px;
   height: 100%;
   padding: 20px 0 0 20px;
   display: flex;

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
-import { setCanvasWidth, setCanvasHeight } from '../../../../store/canvas/actions';
+import { setCanvasWidth, setCanvasHeight, addField } from '../../../../store/canvas/actions';
 
 type CanvasProps = {
   canvas: fabric.Canvas | undefined;
@@ -96,6 +96,14 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
     });
   }, [canvasImage]);
 
+  // set border after change fields
+  useEffect(() => {
+    fabric.Group.prototype.borderColor = '#1890ff';
+    fabric.Group.prototype.borderDashArray = [0];
+    fabric.Object.prototype.borderColor = '#ff4d4f';
+    fabric.Object.prototype.borderDashArray = [5, 5];
+  }, [fields]);
+
   // zoom & out action
   useEffect(() => {
     canvasWidth = canvasWidthProps *= zoomValue;
@@ -117,26 +125,6 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       `position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default`,
     );
   }, [zoomValue]);
-
-  // insert fields
-  useEffect(() => {
-    let rect = new fabric.Rect({
-      width: 100,
-      height: 100,
-      left: 20,
-      top: 20,
-      fill: 'rgba(25, 144, 255, 0.3)',
-    });
-
-    canvas?.add(rect);
-    canvas?.setActiveObject(rect);
-  }, [fields]);
-
-  // set select group border
-  useEffect(() => {
-    fabric.Group.prototype.borderColor = '#1890ff';
-    fabric.Group.prototype.borderDashArray = [0];
-  }, [fields]);
 
   return (
     <>
