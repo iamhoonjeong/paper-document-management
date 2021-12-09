@@ -1,17 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Layout } from 'antd';
 
-import Home from './pages/home/Home';
-import About from './pages/about/About';
+import SideNav from './components/layout/SideNav';
+import Header from './components/layout/Header';
+import Content from './components/layout/Content';
+
+const LayoutStyles = styled(Layout)`
+  height: 100%;
+`;
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/" component={About} />
-      </Switch>
-    </Router>
+    <LayoutStyles>
+      <Router>
+        <SideNav />
+        <Layout className="site-layout">
+          <Header />
+          <Switch>
+            <Content />
+          </Switch>
+        </Layout>
+      </Router>
+    </LayoutStyles>
   );
 }
 
