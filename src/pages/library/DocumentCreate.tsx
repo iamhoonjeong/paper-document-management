@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { fabric } from 'fabric';
 
 import PageTitle from '../../components/PageTitle';
-
 import TitleWrap from './components/document/TitleWrap';
 import ToolWrap from './components/document/ToolWrap';
 import Canvas from './components/document/Canvas';
@@ -13,6 +13,7 @@ import Field from './components/document/Field';
 import Buttons from './components/document/Buttons';
 
 const DocumentCreate = () => {
+  const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   const Fields = useSelector((state: RootState) => state.canvas.fields);
 
   return (
@@ -21,11 +22,11 @@ const DocumentCreate = () => {
       <Wrap>
         <TitleWrap />
         <ContentsWrap>
-          <ToolWrap />
+          <ToolWrap canvas={canvas} />
           <ContentWrap>
             <ContentsLeft>
               <CanvasWrap id="canvas-wrap">
-                <Canvas />
+                <Canvas canvas={canvas} setCanvas={setCanvas} />
               </CanvasWrap>
               <CanvasWrapCornerBox />
             </ContentsLeft>
@@ -76,7 +77,7 @@ const ContentsLeft = styled.div`
 `;
 
 const ContentsRight = styled.div`
-  min-width: 380px;
+  min-width: 360px;
   height: 100%;
   padding: 20px 0 0 20px;
   display: flex;

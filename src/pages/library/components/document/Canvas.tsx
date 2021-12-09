@@ -1,11 +1,16 @@
 /* eslint-disable */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
-import { setCanvasWidth, setCanvasHeight } from '../../../../store/canvas/actions';
+import { setCanvasWidth, setCanvasHeight, addField } from '../../../../store/canvas/actions';
 
-const Canvas = () => {
+type CanvasProps = {
+  canvas: fabric.Canvas | undefined;
+  setCanvas: React.Dispatch<fabric.Canvas | undefined>;
+};
+
+const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
   const dispatch = useDispatch();
 
   let canvasContainer = document.querySelector('.canvas-container');
@@ -19,7 +24,6 @@ const Canvas = () => {
   const fields = useSelector((state: RootState) => state.canvas.fields);
 
   // set canvas
-  const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   useEffect(() => {
     setCanvas(
       new fabric.Canvas('canvas', {
@@ -29,8 +33,23 @@ const Canvas = () => {
     );
   }, []);
 
-  // background image setting
+  // set canvas size
   useEffect(() => {
+    canvas?.setWidth(canvasWidth);
+    canvas?.setHeight(canvasHeight);
+  }, [canvas]);
+
+  // set canvas & background image
+  useEffect(() => {
+    fabric.Group.prototype.hasControls = false;
+    fabric.Object.prototype.transparentCorners = false;
+    fabric.Object.prototype.cornerColor = '#1890ff';
+    fabric.Object.prototype.lockRotation = true;
+    fabric.Object.prototype.cornerSize = 6;
+    fabric.Object.prototype.borderScaleFactor = 2;
+    fabric.Object.prototype.borderDashArray = [5, 5];
+    fabric.Object.prototype.borderColor = '#ff4d4f';
+
     if (canvasImage) {
       let reader: any = new FileReader();
       reader.readAsDataURL(canvasImage);
@@ -52,29 +71,38 @@ const Canvas = () => {
         }, 0);
       };
     }
-  }, [canvas, canvasImage]);
 
-  // canvas settings
+    // set select group border
+    canvas?.on('selection:created', (e) => {
+      const fields = canvas.getActiveObjects();
+
+      if (fields.length >= 2) {
+        fabric.Object.prototype.borderColor = '#1890ff';
+        fabric.Object.prototype.borderDashArray = [0];
+      }
+    });
+
+    // set select group border & after deselect border
+    canvas?.on('mouse:down', (e) => {
+      const fields = canvas.getActiveObjects();
+
+      if (fields.length >= 2) {
+        fabric.Object.prototype.borderColor = '#1890ff';
+        fabric.Object.prototype.borderDashArray = [0];
+      } else {
+        fabric.Object.prototype.borderColor = '#ff4d4f';
+        fabric.Object.prototype.borderDashArray = [5, 5];
+      }
+    });
+  }, [canvasImage]);
+
+  // set border after change fields
   useEffect(() => {
-    fabric.Group.prototype.hasControls = false;
-    canvas?.setWidth(canvasWidth);
-    canvas?.setHeight(canvasHeight);
-
-    // canvas events
-    canvas?.on('before:selection:cleared', (options: any) => {
-      // element sizes
-      // console.log('width:', Math.round(options.target?.width * options.target?.zoomX));
-      // console.log('height:', Math.round(options.target?.height * options.target?.zoomY));
-      //
-      // convert json
-      // let json = JSON.stringify(canvas);
-      // console.log(json);
-    });
-
-    canvas?.on('selection:created', (options: any) => {
-      // console.log(options.selected);
-    });
-  }, [canvas]);
+    fabric.Group.prototype.borderColor = '#1890ff';
+    fabric.Group.prototype.borderDashArray = [0];
+    fabric.Object.prototype.borderColor = '#ff4d4f';
+    fabric.Object.prototype.borderDashArray = [5, 5];
+  }, [fields]);
 
   // zoom & out action
   useEffect(() => {
@@ -97,27 +125,6 @@ const Canvas = () => {
       `position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default`,
     );
   }, [zoomValue]);
-
-  // insert fields
-  useEffect(() => {
-    let rect = new fabric.Rect({
-      width: 100,
-      height: 100,
-      left: 0,
-      top: 0,
-      fill: 'rgba(25, 144, 255, 0.3)',
-      borderScaleFactor: 2,
-      borderDashArray: [5, 5],
-      borderColor: 'red',
-      cornerColor: '#1990ff',
-      cornerSize: 6,
-      transparentCorners: false,
-      lockRotation: true,
-    });
-
-    canvas?.add(rect);
-    canvas?.renderAll();
-  }, [fields]);
 
   return (
     <>
