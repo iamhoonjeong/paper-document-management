@@ -2,22 +2,46 @@ import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import { fabric } from 'fabric';
 import { RootState } from '../../../../store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCanvasImage, setZoomValue, insertField } from '../../../../store/canvas';
+import { setCanvasImage, setZoomValue, addField } from '../../../../store/canvas';
 
 import PageSubTitle from '../../../../components/PageSubTitle';
 
-const ToolWrap = () => {
-  const dispatch = useDispatch();
+type ToolWrapProps = {
+  canvas: fabric.Canvas | undefined;
+};
 
-  let canvas = useSelector((state: RootState) => state.canvas.canvas);
+const ToolWrap = ({ canvas }: ToolWrapProps) => {
+  const dispatch = useDispatch();
   const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue);
 
-  const onChange = (value: any) => {
-    dispatch(setZoomValue(value));
-  };
+  // add field
+  const addFields = useCallback(() => {
+    dispatch(addField('field'));
+  }, [dispatch]);
 
+  // remove field
+  const removeField = useCallback(() => {
+    let fields: any = canvas?.getActiveObjects();
+    if (fields) {
+      for (let i = 0; i < fields.length; i++) {
+        canvas?.remove(fields[i]);
+      }
+    }
+    fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
+  }, [canvas]);
+
+  // zoom value change
+  const zoomValueChange = useCallback(
+    (value: any) => {
+      dispatch(setZoomValue(value));
+    },
+    [dispatch],
+  );
+
+  // image upload
   const props = {
     beforeUpload: (file: any) => {
       if (file.type === 'image/jpeg' || file.type === 'image/png') {
@@ -31,23 +55,13 @@ const ToolWrap = () => {
     onChange: (info: any) => {},
   };
 
-  const deleteField = useCallback(() => {
-    let fields: any = canvas?.getActiveObjects();
-
-    if (fields) {
-      for (let i = 0; i < fields.length; i++) {
-        canvas?.remove(fields[i]);
-      }
-    }
-  }, [canvas]);
-
   return (
     <StyledToolWrap>
       <Tool>
         <PageSubTitle title="필드 추가" />
         <ToolCenterWrap>
-          <StyledToolButton onClick={() => dispatch(insertField('insert'))}>필드 추가</StyledToolButton>
-          <StyledToolButton onClick={deleteField}>필드 삭제</StyledToolButton>
+          <StyledToolButton onClick={addFields}>필드 추가</StyledToolButton>
+          <StyledToolButton onClick={removeField}>필드 삭제</StyledToolButton>
         </ToolCenterWrap>
       </Tool>
       <Tool>
@@ -64,11 +78,17 @@ const ToolWrap = () => {
           <StyledSlider
             min={0}
             max={500}
-            onChange={onChange}
+            onChange={zoomValueChange}
             value={typeof zoomValue === 'number' ? zoomValue : 0}
             tooltipVisible={false}
           />
-          <StyledInputNumber min={0} max={500} style={{ margin: '0 16px' }} value={zoomValue} onChange={onChange} />
+          <StyledInputNumber
+            min={0}
+            max={500}
+            style={{ margin: '0 16px' }}
+            value={zoomValue}
+            onChange={zoomValueChange}
+          />
         </ToolCenterWrap>
       </Tool>
     </StyledToolWrap>

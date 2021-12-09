@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
+import { fabric } from 'fabric';
 
 import PageTitle from '../../components/PageTitle';
 import TitleWrap from './components/document/TitleWrap';
@@ -12,6 +13,7 @@ import Field from './components/document/Field';
 import Buttons from './components/document/Buttons';
 
 const DocumentCreate = () => {
+  const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   const Fields = useSelector((state: RootState) => state.canvas.fields);
 
   return (
@@ -20,11 +22,11 @@ const DocumentCreate = () => {
       <Wrap>
         <TitleWrap />
         <ContentsWrap>
-          <ToolWrap />
+          <ToolWrap canvas={canvas} />
           <ContentWrap>
             <ContentsLeft>
               <CanvasWrap id="canvas-wrap">
-                <Canvas />
+                <Canvas canvas={canvas} setCanvas={setCanvas} />
               </CanvasWrap>
               <CanvasWrapCornerBox />
             </ContentsLeft>

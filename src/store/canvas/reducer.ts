@@ -1,9 +1,8 @@
 import { createReducer } from 'typesafe-actions';
 import { CanvasAction, CanvasState } from './types';
-import { SET_CANVAS, SET_ZOOMVALUE, SET_IMAGE, SET_WIDTH, SET_HEIGHT, INSERT_FIELD } from './actions';
+import { SET_ZOOMVALUE, SET_IMAGE, SET_WIDTH, SET_HEIGHT, ADD_FIELD } from './actions';
 
 const initialState: CanvasState = {
-  canvas: null,
   zoomValue: 100,
   image: null,
   width: 0,
@@ -12,7 +11,6 @@ const initialState: CanvasState = {
 };
 
 const loading = createReducer<CanvasState, CanvasAction>(initialState, {
-  [SET_CANVAS]: (state, action) => ({ ...state, canvas: action.payload }),
   [SET_ZOOMVALUE]: (state, action) => ({ ...state, zoomValue: action.payload }),
   [SET_IMAGE]: (state, action) => ({
     ...state,
@@ -29,7 +27,7 @@ const loading = createReducer<CanvasState, CanvasAction>(initialState, {
     height: action.payload,
     zoomValue: 100,
   }),
-  [INSERT_FIELD]: (state, action) => ({
+  [ADD_FIELD]: (state, action) => ({
     ...state,
     fields: state.fields.concat(action.payload),
   }),
