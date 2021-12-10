@@ -29,11 +29,13 @@ const loading = createReducer<CanvasState, CanvasAction>(initialState, {
   }),
   [ADD_FIELD]: (state, action) => ({
     ...state,
-    fields: state.fields.concat(action.payload),
+    fields: state.fields.concat({ id: action.payload }),
   }),
   [REMOVE_FIELD]: (state, action) => ({
     ...state,
-    fields: [...state.fields.slice(0, state.fields.length - 1)],
+    fields: state.fields.filter((fields: any) => {
+      return fields.id !== action.payload;
+    }),
   }),
 });
 

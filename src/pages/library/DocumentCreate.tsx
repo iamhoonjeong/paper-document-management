@@ -32,9 +32,9 @@ const DocumentCreate = () => {
             </ContentsLeft>
             <ContentsRight>
               <FieldWrap>
-                {Fields.map((el: any, i: any) => {
-                  return <Field key={i} titleNumber={i + 1} />;
-                })}
+                {Fields.map((el: any, i: any) => (
+                  <Field key={i} titleNumber={i + 1} />
+                ))}
               </FieldWrap>
               <Buttons />
             </ContentsRight>
