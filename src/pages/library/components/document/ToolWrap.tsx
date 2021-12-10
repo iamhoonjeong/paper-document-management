@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -19,12 +19,14 @@ type ToolWrapProps = {
 };
 
 const ToolWrap = ({ canvas }: ToolWrapProps) => {
+  const [fieldCount, setFieldCount] = useState(0);
+
   const dispatch = useDispatch();
   const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue);
 
   // add field
   const addField = useCallback(() => {
-    dispatch(addFieldAction('field'));
+    dispatch(addFieldAction(fieldCount));
 
     let rect = new fabric.Rect({
       width: 100,
@@ -32,16 +34,18 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
       left: 20,
       top: 20,
       fill: 'rgba(25, 144, 255, 0.3)',
+      data: {
+        id: fieldCount,
+      },
     });
-
     canvas?.add(rect);
     canvas?.setActiveObject(rect);
-  }, [canvas, dispatch]);
+
+    setFieldCount((prev) => prev + 1);
+  }, [canvas, dispatch, fieldCount]);
 
   // remove field
   const removeField = useCallback(() => {
-    dispatch(removeFieldAction('field'));
-
     let fields: any = canvas?.getActiveObjects();
     if (fields) {
       for (let i = 0; i < fields.length; i++) {
@@ -49,6 +53,8 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
       }
     }
     fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
+
+    fields.map((field: any) => dispatch(removeFieldAction(field.data.id)));
   }, [canvas, dispatch]);
 
   // zoom value change
