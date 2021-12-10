@@ -18,7 +18,7 @@ const DocumentCreate = () => {
 
   return (
     <>
-      <PageTitle>문서 만들기</PageTitle>
+      <PageTitle>페이지 만들기</PageTitle>
       <Wrap>
         <TitleWrap />
         <ContentsWrap>

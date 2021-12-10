@@ -18,7 +18,7 @@ const Field = ({ titleNumber }: FieldProps) => {
         {/* <FieldDeleteButton danger>삭제</FieldDeleteButton> */}
       </FieldHeaderWrap>
       <FieldContentWrap>
-        <FieldContentName>필드이름</FieldContentName>
+        <FieldContentName>필드 이름</FieldContentName>
         <FieldContentNameInput placeholder={`필드 ${titleNumber}`} />
       </FieldContentWrap>
     </StyledField>

@@ -4,11 +4,12 @@ import styled from 'styled-components';
 type PageSubTitleProps = {
   title?: string;
   desc?: string;
+  width?: number | undefined;
 };
 
-const PageSubTitle = ({ title, desc }: PageSubTitleProps) => {
+const PageSubTitle = ({ title, desc, width }: PageSubTitleProps) => {
   return (
-    <StyledPageSubTitle>
+    <StyledPageSubTitle width={width}>
       {title}
       {desc && <span>( {desc} )</span>}
     </StyledPageSubTitle>
@@ -17,10 +18,10 @@ const PageSubTitle = ({ title, desc }: PageSubTitleProps) => {
 
 export default PageSubTitle;
 
-const StyledPageSubTitle = styled.div`
+const StyledPageSubTitle = styled.div<{ width?: number }>`
   font-weight: bold;
   font-size: 14px;
-  min-width: 56px;
+  min-width: ${(props) => (props.width ? `${props.width}px` : '56px')};
 
   span {
     margin-left: 4px;
