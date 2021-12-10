@@ -12,15 +12,6 @@ const Home = () => {
         <Card>
           <PageSubTitle title="네트워크" />
         </Card>
-        <Card>
-          <PageSubTitle title="네트워크" />
-        </Card>
-        <Card>
-          <PageSubTitle title="네트워크" />
-        </Card>
-        <Card>
-          <PageSubTitle title="네트워크" />
-        </Card>
       </CardWrap>
     </>
   );
@@ -35,11 +26,12 @@ const CardWrap = styled.div`
   grid-template-rows: 1fr 1fr 1fr;
   row-gap: 30px;
   column-gap: 10px;
+  overflow: hidden;
 `;
 
 const Card = styled.div`
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
-  min-width: 200px;
+  min-width: 320px;
   height: 300px;
   background-color: #fff;
   padding: 20px;

@@ -64,10 +64,18 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
           let image = new Image();
           image.src = reader.result;
           const { width, height } = image;
+
           canvas?.setWidth(width);
           canvas?.setHeight(height);
           dispatch(setCanvasWidth(width));
           dispatch(setCanvasHeight(height));
+
+          // set canvas border size
+          const canvasBorder = document.querySelector('#canvas-border');
+          canvasBorder?.setAttribute(
+            'style',
+            `width: ${width + 40}px; height: ${height + 40}px; background-color: #dee2e6; padding: 20px;`,
+          );
         }, 0);
       };
     }
@@ -109,12 +117,16 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
     canvasWidth = canvasWidthProps *= zoomValue;
     canvasHeight = canvasHeightProps *= zoomValue;
 
+    const canvasBorder = document.querySelector('#canvas-border');
     const lowerCanvas = document.querySelector('.lower-canvas');
     const upperCanvas = document.querySelector('.upper-canvas');
 
-    canvasContainer?.setAttribute(
+    // change canvas border size if zoomValue change
+    canvasBorder?.setAttribute(
       'style',
-      `width: ${canvasWidth}px; height: ${canvasHeight}px; position: relative; user-select: none`,
+      canvasWidth !== 0
+        ? `width: ${canvasWidth + 40}px; height: ${canvasHeight + 40}px; background-color: #dee2e6; padding: 20px;`
+        : `width: 0px; height: 0px;`,
     );
     lowerCanvas?.setAttribute(
       'style',
@@ -124,11 +136,17 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       'style',
       `position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; touch-action: none; user-select: none; cursor: default`,
     );
+    canvasContainer?.setAttribute(
+      'style',
+      `width: ${canvasWidth}px; height: ${canvasHeight}px; position: relative; user-select: none`,
+    );
   }, [zoomValue]);
 
   return (
     <>
-      <canvas id="canvas"></canvas>
+      <div id="canvas-border">
+        <canvas id="canvas"></canvas>
+      </div>
     </>
   );
 };
