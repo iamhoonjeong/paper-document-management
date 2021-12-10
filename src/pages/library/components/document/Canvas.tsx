@@ -85,8 +85,14 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       const fields = canvas.getActiveObjects();
 
       if (fields.length >= 2) {
+        fabric.Group.prototype.borderColor = '#1890ff';
+        fabric.Group.prototype.borderDashArray = [0];
         fabric.Object.prototype.borderColor = '#1890ff';
         fabric.Object.prototype.borderDashArray = [0];
+      } else {
+        fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
+        fabric.Object.prototype.borderColor = '#ff4d4f';
+        fabric.Object.prototype.borderDashArray = [5, 5];
       }
     });
 
@@ -95,22 +101,17 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       const fields = canvas.getActiveObjects();
 
       if (fields.length >= 2) {
+        fabric.Group.prototype.borderColor = '#1890ff';
+        fabric.Group.prototype.borderDashArray = [0];
         fabric.Object.prototype.borderColor = '#1890ff';
         fabric.Object.prototype.borderDashArray = [0];
       } else {
+        fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
         fabric.Object.prototype.borderColor = '#ff4d4f';
         fabric.Object.prototype.borderDashArray = [5, 5];
       }
     });
   }, [canvasImage]);
-
-  // set border after change fields
-  useEffect(() => {
-    fabric.Group.prototype.borderColor = '#1890ff';
-    fabric.Group.prototype.borderDashArray = [0];
-    fabric.Object.prototype.borderColor = '#ff4d4f';
-    fabric.Object.prototype.borderDashArray = [5, 5];
-  }, [fields]);
 
   // zoom & out action
   useEffect(() => {
