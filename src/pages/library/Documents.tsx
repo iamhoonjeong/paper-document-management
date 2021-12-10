@@ -58,11 +58,11 @@ const DocumentList = () => {
     <>
       <PageTitle>문서 목록</PageTitle>
       <ButtonWrap>
-        <CreateButton type="primary">
+        <StyledButton type="primary">
           <Link to="/library/document/page/create">문서 만들기</Link>
-        </CreateButton>
-        <CreateButton type="default">문서 다운로드</CreateButton>
-        <CreateButton danger>삭제</CreateButton>
+        </StyledButton>
+        <StyledButton type="default">문서 다운로드</StyledButton>
+        <StyledButton danger>삭제</StyledButton>
       </ButtonWrap>
       <Table rowSelection={rowSelection} columns={columns} dataSource={data} bordered />
     </>
@@ -76,7 +76,7 @@ const ButtonWrap = styled.div`
   margin: 20px 0;
 `;
 
-const CreateButton = styled(Button)`
+const StyledButton = styled(Button)`
   font-size: 12px;
   & + & {
     margin-left: 10px;

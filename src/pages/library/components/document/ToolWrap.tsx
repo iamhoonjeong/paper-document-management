@@ -26,6 +26,12 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
 
   // add field
   const addField = useCallback(() => {
+    // block add field when without canvas
+    if (!canvas?.getWidth()) {
+      console.log('이미지 추가 후 필드 생성이 가능합니다.');
+      return;
+    }
+
     dispatch(addFieldAction(fieldCount));
 
     let rect = new fabric.Rect({
@@ -42,17 +48,24 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
     canvas?.setActiveObject(rect);
 
     setFieldCount((prev) => prev + 1);
+    console.log('필드 생성');
   }, [canvas, dispatch, fieldCount]);
 
   // remove field
   const removeField = useCallback(() => {
     let fields: any = canvas?.getActiveObjects();
-    if (fields) {
-      for (let i = 0; i < fields.length; i++) {
-        canvas?.remove(fields[i]);
-      }
+
+    if (fields.length === 0) {
+      console.log('삭제할 필드가 없습니다.');
+      return;
     }
+
     fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
+
+    for (let i = 0; i < fields.length; i++) {
+      canvas?.remove(fields[i]);
+      console.log('필드 삭제');
+    }
 
     fields.map((field: any) => dispatch(removeFieldAction(field.data.id)));
   }, [canvas, dispatch]);
@@ -89,7 +102,7 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
         </ToolCenterWrap>
       </Tool>
       <Tool>
-        <PageSubTitle title="문서 추가" desc="jpg, png" />
+        <PageSubTitle title="이미지 추가" desc="jpg, png" width={130} />
         <ToolCenterWrap>
           <Upload {...props}>
             <StyledToolButton icon={<UploadOutlined />}>이미지 업로드</StyledToolButton>
@@ -97,7 +110,7 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
         </ToolCenterWrap>
       </Tool>
       <Tool>
-        <PageSubTitle title="문서 확대/축소" />
+        <PageSubTitle title="페이지 확대/축소" />
         <ToolCenterWrap>
           <StyledSlider
             min={0}

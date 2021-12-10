@@ -55,7 +55,7 @@ const SideNav = () => {
             <Link to="/library/document/pages">페이지 목록</Link>
           </Item>
           <Item key="3">
-            <Link to="/library/document/page/create">문서 만들기</Link>
+            <Link to="/library/document/page/create">페이지 만들기</Link>
           </Item>
         </SubMenu>
       </Menu>
