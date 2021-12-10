@@ -40,10 +40,7 @@ const SideNav = () => {
         {collapsed ? (
           <LogoNarrow>S</LogoNarrow>
         ) : (
-          <LogoWide
-            src="/images/logos/smallticket_white.png"
-            alt="company logo"
-          />
+          <LogoWide src="/images/logos/smallticket_white.png" alt="company logo" />
         )}
       </LogoWrap>
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
@@ -52,10 +49,13 @@ const SideNav = () => {
         </Item>
         <SubMenu key="sub1" icon={<BookOutlined />} title="문서 라이브러리">
           <Item key="2">
-            <Link to="/library/list">문서 목록</Link>
+            <Link to="/library/documents">문서 목록</Link>
+          </Item>
+          <Item key="4">
+            <Link to="/library/document/pages">페이지 목록</Link>
           </Item>
           <Item key="3">
-            <Link to="/library/document/create">문서 만들기</Link>
+            <Link to="/library/document/page/create">문서 만들기</Link>
           </Item>
         </SubMenu>
       </Menu>
