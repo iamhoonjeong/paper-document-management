@@ -8,8 +8,9 @@ import { RootState } from '../../store';
 import Loading from '../Loading';
 
 import Home from '../../pages/home/Home';
-import DocumentList from '../../pages/library/DocumentList';
-import DocumentCreate from '../../pages/library/DocumentCreate';
+import Documents from '../../pages/library/Documents';
+import DocumentPages from '../../pages/library/DocumentPages';
+import PageCreate from '../../pages/library/PageCreate';
 
 const Content = () => {
   const loading = useSelector((state: RootState) => state.loading.onLoading);
@@ -19,8 +20,9 @@ const Content = () => {
       {loading && <Loading />}
       <StyledContent>
         <Route path="/" exact component={Home} />
-        <Route path="/library/list" component={DocumentList} />
-        <Route path="/library/document/create" component={DocumentCreate} />
+        <Route path="/library/documents" component={Documents} />
+        <Route path="/library/document/pages" component={DocumentPages} />
+        <Route path="/library/document/page/create" component={PageCreate} />
       </StyledContent>
     </>
   );
