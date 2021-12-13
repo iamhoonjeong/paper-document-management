@@ -3,7 +3,8 @@ import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../../store';
-import { setCanvasWidth, setCanvasHeight, addField } from '../../../../store/canvas/actions';
+import { setCanvasWidth, setCanvasHeight, setCanvasImage, removeAllField } from '../../../../store/canvas';
+import { useHistory } from 'react-router-dom';
 
 type CanvasProps = {
   canvas: fabric.Canvas | undefined;
@@ -11,6 +12,7 @@ type CanvasProps = {
 };
 
 const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   let canvasContainer = document.querySelector('.canvas-container');
@@ -25,6 +27,8 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
 
   // set canvas
   useEffect(() => {
+    if (canvas) return;
+
     setCanvas(
       new fabric.Canvas('canvas', {
         backgroundColor: '#fff',
@@ -41,6 +45,8 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
 
   // set canvas & background image
   useEffect(() => {
+    if (!canvasImage) return;
+
     fabric.Group.prototype.hasControls = false;
     fabric.Object.prototype.transparentCorners = false;
     fabric.Object.prototype.cornerColor = '#1890ff';
@@ -115,6 +121,8 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
 
   // zoom & out action
   useEffect(() => {
+    if (!canvasImage) return;
+
     canvasWidth = canvasWidthProps *= zoomValue;
     canvasHeight = canvasHeightProps *= zoomValue;
 
@@ -142,6 +150,25 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       `width: ${canvasWidth}px; height: ${canvasHeight}px; position: relative; user-select: none`,
     );
   }, [zoomValue]);
+
+  // exit canvas confirm
+  useEffect(() => {
+    const unblock = history.block((location, action) => {
+      if (action && location.pathname !== '/library/document/page/create') {
+        if (confirm('편집을 종료하시겠어요?')) {
+          dispatch(setCanvasImage(null));
+          dispatch(setCanvasWidth(0));
+          dispatch(setCanvasHeight(0));
+          dispatch(removeAllField());
+          return;
+        } else {
+          return false;
+        }
+      }
+    });
+
+    return () => unblock();
+  }, []);
 
   return (
     <>
