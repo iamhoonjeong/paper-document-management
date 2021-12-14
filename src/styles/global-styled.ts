@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Noto Sans KR', sans-serif;
     box-sizing: border-box;
+    font-weight: 300;
   }
 
   a {
@@ -88,6 +89,10 @@ const GlobalStyle = createGlobalStyle`
   .ant-dropdown-trigger > .anticon.anticon-down, .ant-dropdown-link > .anticon.anticon-down, .ant-dropdown-button > .anticon.anticon-down {
     position: relative;
     top: 4px;
+  }
+
+  .ant-input {
+    font-size: 12px;
   }
 `;
 
