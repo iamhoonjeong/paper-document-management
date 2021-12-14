@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PageSubTitle from '../../../../components/PageSubTitle';
+import PageSubTitle from '../../../components/PageSubTitle';
 
 const FieldWrap = ({ children }: { children: React.ReactNode }) => {
   return (

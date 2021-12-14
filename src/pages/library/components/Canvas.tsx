@@ -2,8 +2,8 @@
 import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../../store';
-import { setCanvasWidth, setCanvasHeight, setCanvasImage, removeAllField } from '../../../../store/canvas';
+import { RootState } from '../../../store';
+import { setCanvasWidth, setCanvasHeight, setCanvasImage, removeAllField } from '../../../store/canvas';
 import { useHistory } from 'react-router-dom';
 
 type CanvasProps = {
