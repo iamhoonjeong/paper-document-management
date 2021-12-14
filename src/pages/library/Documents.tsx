@@ -37,7 +37,11 @@ const DocumentList = () => {
       documentName: `문서 ${i}`,
       createDate: `2021-11-11 14:43:15`,
       modifiedDate: `2021-11-11 14:43:15`,
-      documentModify: <ModifyButton type="ghost">보기</ModifyButton>,
+      documentModify: (
+        <ModifyButton type="ghost">
+          <Link to="/library/document/pages">보기</Link>
+        </ModifyButton>
+      ),
     });
   }
   const [state, setState] = useState({
@@ -59,7 +63,7 @@ const DocumentList = () => {
       <PageTitle>문서 목록</PageTitle>
       <ButtonWrap>
         <StyledButton type="primary">
-          <Link to="/library/document/page/create">문서 만들기</Link>
+          <Link to="/library/document/create">문서 만들기</Link>
         </StyledButton>
         <StyledButton type="default">문서 다운로드</StyledButton>
         <StyledButton danger>삭제</StyledButton>

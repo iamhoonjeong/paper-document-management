@@ -37,7 +37,11 @@ const DocumentPages = () => {
       documentName: `문서 ${i}`,
       createDate: `2021-11-11 14:43:15`,
       modifiedDate: `2021-11-11 14:43:15`,
-      documentModify: <ModifyButton type="ghost">수정</ModifyButton>,
+      documentModify: (
+        <ModifyButton type="ghost">
+          <Link to="/library/document/page/create">수정</Link>
+        </ModifyButton>
+      ),
     });
   }
   const [state, setState] = useState({

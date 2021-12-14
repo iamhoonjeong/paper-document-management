@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, Button } from 'antd';
 
-import PageSubTitle from '../../../../components/PageSubTitle';
+import PageSubTitle from '../../../components/PageSubTitle';
 
 const TitleArea = () => {
   return (

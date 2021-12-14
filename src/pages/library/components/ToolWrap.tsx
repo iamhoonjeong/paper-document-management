@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { fabric } from 'fabric';
-import { RootState } from '../../../../store';
+import { RootState } from '../../../store';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setCanvasImage,
   setZoomValue,
   addField as addFieldAction,
   removeField as removeFieldAction,
-} from '../../../../store/canvas';
+} from '../../../store/canvas';
 
-import PageSubTitle from '../../../../components/PageSubTitle';
+import PageSubTitle from '../../../components/PageSubTitle';
 
 type ToolWrapProps = {
   canvas: fabric.Canvas | undefined;

@@ -81,8 +81,8 @@ const Wrap = styled.div`
   min-height: 500px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: scroll;
+  align-items: flex-start;
+  padding-top: 60px;
 `;
 
 const StyledLogin = styled.div`
@@ -99,8 +99,8 @@ const StyledLogin = styled.div`
   height: 500px;
   min-height: 500px;
   padding: 40px 60px;
-  position: relative;
-  top: -30px;
+  /* position: relative;
+  top: -30px; */
 `;
 
 const Title = styled.div`
