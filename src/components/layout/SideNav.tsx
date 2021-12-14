@@ -49,15 +49,12 @@ const SideNav = () => {
         </Item>
         <SubMenu key="sub1" icon={<BookOutlined />} title="문서 라이브러리">
           <Item key="2">
-            <Link to="/library/documents">문서 목록</Link>
-          </Item>
-          <Item key="4">
-            <Link to="/library/document/pages">페이지 목록</Link>
-          </Item>
-          <Item key="3">
-            <Link to="/library/document/page/create">페이지 만들기</Link>
+            <Link to="/library/document">문서 목록</Link>
           </Item>
         </SubMenu>
+        <Item key="3">
+          <Link to="/login">로그인</Link>
+        </Item>
       </Menu>
     </Layout.Sider>
   );

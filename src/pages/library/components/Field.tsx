@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input /* Button */ } from 'antd';
+import { Input } from 'antd';
 import { SwapOutlined } from '@ant-design/icons';
 
 type FieldProps = {
@@ -15,7 +15,6 @@ const Field = ({ titleNumber }: FieldProps) => {
           <FieldIcon />
           필드 {titleNumber}
         </FieldTitle>
-        {/* <FieldDeleteButton danger>삭제</FieldDeleteButton> */}
       </FieldHeaderWrap>
       <FieldContentWrap>
         <FieldContentName>필드 이름</FieldContentName>
@@ -53,10 +52,6 @@ const FieldIcon = styled(SwapOutlined)`
   transform: rotate(90deg);
   margin-right: 8px;
 `;
-
-// const FieldDeleteButton = styled(Button)`
-//   font-size: 12px;
-// `;
 
 const FieldContentWrap = styled.div`
   padding: 20px;

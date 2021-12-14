@@ -5,12 +5,12 @@ import { RootState } from '../../store';
 import { fabric } from 'fabric';
 
 import PageTitle from '../../components/PageTitle';
-import TitleWrap from './components/document/TitleWrap';
-import ToolWrap from './components/document/ToolWrap';
-import Canvas from './components/document/Canvas';
-import FieldWrap from './components/document/FieldWrap';
-import Field from './components/document/Field';
-import Buttons from './components/document/Buttons';
+import TitleWrap from './components/TitleWrap';
+import ToolWrap from './components/ToolWrap';
+import Canvas from './components/Canvas';
+import FieldWrap from './components/FieldWrap';
+import Field from './components/Field';
+import Buttons from './components/Buttons';
 
 const DocumentCreate = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();

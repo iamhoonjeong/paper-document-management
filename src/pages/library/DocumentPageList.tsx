@@ -5,14 +5,14 @@ import { Button, Table } from 'antd';
 
 import PageTitle from '../../components/PageTitle';
 
-const DocumentList = () => {
+const DocumentPages = () => {
   const columns = [
     {
-      title: '문서 ID',
+      title: '페이지 ID',
       dataIndex: 'documentId',
     },
     {
-      title: '문서 명',
+      title: '페이지 명',
       dataIndex: 'documentName',
     },
     {
@@ -30,14 +30,18 @@ const DocumentList = () => {
     },
   ];
   const data: any = [];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 5; i++) {
     data.push({
       key: i,
       documentId: 100000 + i,
       documentName: `문서 ${i}`,
       createDate: `2021-11-11 14:43:15`,
       modifiedDate: `2021-11-11 14:43:15`,
-      documentModify: <ModifyButton type="ghost">보기</ModifyButton>,
+      documentModify: (
+        <ModifyButton type="ghost">
+          <Link to="/library/document/page/create">수정</Link>
+        </ModifyButton>
+      ),
     });
   }
   const [state, setState] = useState({
@@ -56,12 +60,12 @@ const DocumentList = () => {
 
   return (
     <>
-      <PageTitle>문서 목록</PageTitle>
+      <PageTitle>페이지 목록</PageTitle>
       <ButtonWrap>
         <StyledButton type="primary">
-          <Link to="/library/document/page/create">문서 만들기</Link>
+          <Link to="/library/document/page/create">페이지 만들기</Link>
         </StyledButton>
-        <StyledButton type="default">문서 다운로드</StyledButton>
+        <StyledButton type="default">페이지 다운로드</StyledButton>
         <StyledButton danger>삭제</StyledButton>
       </ButtonWrap>
       <Table rowSelection={rowSelection} columns={columns} dataSource={data} bordered />
@@ -69,7 +73,7 @@ const DocumentList = () => {
   );
 };
 
-export default DocumentList;
+export default DocumentPages;
 
 const ButtonWrap = styled.div`
   display: flex;
