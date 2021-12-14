@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 const DocumentCreateButtons = () => {
+  const history = useHistory();
+
   return (
     <DocumentButtonWrap>
-      <DocumentCompleteButton>취소</DocumentCompleteButton>
+      <DocumentCompleteButton onClick={() => history.goBack()}>취소</DocumentCompleteButton>
       <DocumentCompleteButton type="primary">저장</DocumentCompleteButton>
     </DocumentButtonWrap>
   );
