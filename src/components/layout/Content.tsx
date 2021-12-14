@@ -9,9 +9,9 @@ import Loading from '../Loading';
 
 import Home from '../../pages/home/Home';
 import Login from '../../pages/login/Login';
-import Documents from '../../pages/library/Documents';
+import DocumentList from '../../pages/library/DocumentList';
 import DocumentCreate from '../../pages/library/DocumentCreate';
-import DocumentPages from '../../pages/library/DocumentPages';
+import DocumentPageList from '../../pages/library/DocumentPageList';
 import PageCreate from '../../pages/library/PageCreate';
 
 const Content = () => {
@@ -24,9 +24,9 @@ const Content = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/library/document" exact component={Documents} />
+          <Route path="/library/document" exact component={DocumentList} />
           <Route path="/library/document/create" component={DocumentCreate} />
-          <Route path="/library/document/pages" component={DocumentPages} />
+          <Route path="/library/document/pages" component={DocumentPageList} />
           <Route path="/library/document/page/create" component={PageCreate} />
         </Switch>
       </StyledContent>

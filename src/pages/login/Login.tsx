@@ -19,17 +19,8 @@ function Login() {
   const [inputPwValue, setInputPwValue] = useState('');
 
   const onValidationCheck = useCallback(() => {
-    if (inputValue.id.length === 0) {
-      setInputIdValue('아이디를 입력해주세요');
-    } else if (inputValue.id.length !== 0) {
-      setInputIdValue('');
-    }
-
-    if (inputValue.pw.length === 0) {
-      setInputPwValue('비밀번호를 입력해주세요');
-    } else if (inputValue.pw.length !== 0) {
-      setInputPwValue('');
-    }
+    !inputValue.id.length ? setInputIdValue('아이디를 입력해주세요') : setInputIdValue('');
+    !inputValue.pw.length ? setInputPwValue('비밀번호를 입력해주세요') : setInputPwValue('');
   }, [inputValue]);
 
   useEffect(() => {
@@ -44,6 +35,15 @@ function Login() {
       window.removeEventListener('keyup', onKeyPressEvent, false);
     };
   }, [onValidationCheck]);
+
+  useEffect(() => {
+    if (inputValue.id.length !== 0) {
+      setInputIdValue('');
+    }
+    if (inputValue.pw.length !== 0) {
+      setInputPwValue('');
+    }
+  }, [inputValue]);
 
   return (
     <Wrap>
@@ -99,8 +99,6 @@ const StyledLogin = styled.div`
   height: 500px;
   min-height: 500px;
   padding: 40px 60px;
-  /* position: relative;
-  top: -30px; */
 `;
 
 const Title = styled.div`
