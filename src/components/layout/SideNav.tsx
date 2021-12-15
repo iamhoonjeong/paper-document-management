@@ -51,8 +51,17 @@ const SideNav = () => {
           <Item key="2">
             <Link to="/library/document">문서 목록</Link>
           </Item>
+          <Item key="3">
+            <Link to="/library/document/create">문서 만들기</Link>
+          </Item>
+          <Item key="4">
+            <Link to="/library/document/pages">페이지 목록</Link>
+          </Item>
+          <Item key="5">
+            <Link to="/library/document/page/create">페이지 만들기</Link>
+          </Item>
         </SubMenu>
-        <Item key="3" icon={<LoginOutlined />}>
+        <Item key="6" icon={<LoginOutlined />}>
           <Link to="/login">로그인</Link>
         </Item>
       </Menu>
