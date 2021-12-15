@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
-import { HomeOutlined, BookOutlined } from '@ant-design/icons';
+import { HomeOutlined, BookOutlined, LoginOutlined } from '@ant-design/icons';
 
 const LogoWrap = styled.div`
   width: 100%;
@@ -52,7 +52,7 @@ const SideNav = () => {
             <Link to="/library/document">문서 목록</Link>
           </Item>
         </SubMenu>
-        <Item key="3">
+        <Item key="3" icon={<LoginOutlined />}>
           <Link to="/login">로그인</Link>
         </Item>
       </Menu>

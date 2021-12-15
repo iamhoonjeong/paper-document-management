@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { ChangeEvent, useCallback, useState } from 'react';
 import styled from 'styled-components';
-import { Input, Button } from 'antd';
+import { Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setCreateTitleInput } from '../../../store/library';
 
 import PageSubTitle from '../../../components/PageSubTitle';
 
-const TitleArea = () => {
+type TitleAreaProps = {
+  title: string;
+  documentCreate?: JSX.Element;
+};
+
+const TitleArea = ({ title, documentCreate }: TitleAreaProps) => {
+  const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState('');
+
+  const onCreateTitleInputChange = useCallback(
+    (value: string) => {
+      dispatch(setCreateTitleInput(value));
+    },
+    [dispatch],
+  );
+
+  const onInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
+      onCreateTitleInputChange(e.target.value);
+    },
+    [onCreateTitleInputChange],
+  );
+
   return (
     <SetTitleArea>
-      <PageSubTitle title="페이지 이름" />
-      <StyledInput placeholder="페이지 이름 입력" />
-      <StyledButton type="primary">확인</StyledButton>
+      <PageSubTitle title={`${title} 이름`} />
+      <StyledInput placeholder={`${title} 이름 입력`} value={inputValue} onChange={onInputChange} />
+      {documentCreate && documentCreate}
     </SetTitleArea>
   );
 };
@@ -35,9 +60,4 @@ const StyledInput = styled(Input)`
   &::placeholder {
     font-size: 12px;
   }
-`;
-
-const StyledButton = styled(Button)`
-  margin-left: 12px;
-  font-size: 12px;
 `;

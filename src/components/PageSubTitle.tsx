@@ -21,7 +21,8 @@ export default PageSubTitle;
 const StyledPageSubTitle = styled.div<{ width?: number }>`
   font-weight: bold;
   font-size: 14px;
-  min-width: ${(props) => (props.width ? `${props.width}px` : '56px')};
+  min-width: ${(props) => (props.width ? `${props.width}px` : '')};
+  white-space: nowrap;
 
   span {
     margin-left: 4px;
