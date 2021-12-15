@@ -20,7 +20,7 @@ const DocumentCreate = () => {
     <>
       <PageTitle>페이지 만들기</PageTitle>
       <Wrap>
-        <TitleWrap />
+        <TitleWrap title="페이지" />
         <ContentsWrap>
           <ToolWrap canvas={canvas} />
           <ContentWrap>
