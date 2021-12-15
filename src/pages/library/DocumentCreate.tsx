@@ -21,7 +21,6 @@ const DocumentCreate = () => {
       return;
     }
 
-    console.log(`문서 만들기 - 문서 이름: ${titleWrapInputData}`);
     dispatch(setCreateTitleInput(''));
 
     setTimeout(() => {
