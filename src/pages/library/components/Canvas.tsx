@@ -3,7 +3,14 @@ import React, { useEffect } from 'react';
 import { fabric } from 'fabric';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../store';
-import { setCanvasWidth, setCanvasHeight, setCanvasImage, removeAllField } from '../../../store/canvas';
+import {
+  setCanvasWidth,
+  setCanvasHeight,
+  setCanvasImage,
+  removeAllField,
+  setActiveField,
+  unSetActiveField,
+} from '../../../store/canvas';
 import { useHistory } from 'react-router-dom';
 
 type CanvasProps = {
@@ -23,7 +30,6 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
   let canvasHeightProps = useSelector((state: RootState) => state.canvas.height);
   const canvasImage = useSelector((state: RootState) => state.canvas.image);
   const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue / 100);
-  const fields = useSelector((state: RootState) => state.canvas.fields);
 
   // set canvas
   useEffect(() => {
@@ -86,9 +92,16 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       };
     }
 
-    // set select group border
+    // set select group border & active fields
     canvas?.on('selection:created', (e) => {
       const fields = canvas.getActiveObjects();
+
+      if (!fields) return;
+
+      dispatch(unSetActiveField());
+      for (let i = 0; i < fields.length; i++) {
+        dispatch(setActiveField(fields[i].data.id));
+      }
 
       if (fields.length >= 2) {
         fabric.Group.prototype.borderColor = '#1890ff';
@@ -102,9 +115,16 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       }
     });
 
-    // set select group border & after deselect border
+    // set select group border & after deselect border & active fields
     canvas?.on('mouse:down', (e) => {
       const fields = canvas.getActiveObjects();
+
+      if (!fields) return;
+
+      dispatch(unSetActiveField());
+      for (let i = 0; i < fields.length; i++) {
+        dispatch(setActiveField(fields[i].data.id));
+      }
 
       if (fields.length >= 2) {
         fabric.Group.prototype.borderColor = '#1890ff';
@@ -116,6 +136,16 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
         fabric.Object.prototype.borderColor = '#ff4d4f';
         fabric.Object.prototype.borderDashArray = [5, 5];
       }
+    });
+
+    // active fields
+    canvas?.on('object:added', (e: any) => {
+      dispatch(setActiveField(e.target.data.id));
+    });
+
+    // unset active fields
+    canvas?.on('selection:cleared', (e) => {
+      dispatch(unSetActiveField());
     });
   }, [canvasImage]);
 

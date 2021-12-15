@@ -15,6 +15,7 @@ import Buttons from './components/Buttons';
 const DocumentCreate = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
   const Fields = useSelector((state: RootState) => state.canvas.fields);
+  const activeFields: number[] = useSelector((state: RootState) => state.canvas.activeFields);
 
   return (
     <>
@@ -32,9 +33,13 @@ const DocumentCreate = () => {
             </ContentsLeft>
             <ContentsRight>
               <FieldWrap>
-                {Fields.map((el: any, i: any) => (
-                  <Field key={i} titleNumber={i + 1} />
-                ))}
+                {Fields.map((el: any, i: any) => {
+                  return activeFields.includes(el.id) ? (
+                    <Field key={i} titleNumber={i + 1} active id={el.id} />
+                  ) : (
+                    <Field key={i} titleNumber={i + 1} id={el.id} />
+                  );
+                })}
               </FieldWrap>
               <Buttons />
             </ContentsRight>
@@ -45,7 +50,7 @@ const DocumentCreate = () => {
   );
 };
 
-export default DocumentCreate;
+export default React.memo(DocumentCreate);
 
 const Wrap = styled.div`
   display: flex;

@@ -10,6 +10,7 @@ import {
   setZoomValue,
   addField as addFieldAction,
   removeField as removeFieldAction,
+  unSetActiveField,
 } from '../../../store/canvas';
 
 import PageSubTitle from '../../../components/PageSubTitle';
@@ -27,11 +28,9 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
   // add field
   const addField = useCallback(() => {
     // block add field when without canvas
-    if (!canvas?.getWidth()) {
-      console.log('이미지 추가 후 필드 생성이 가능합니다.');
-      return;
-    }
+    if (!canvas?.getWidth()) return;
 
+    dispatch(unSetActiveField());
     dispatch(addFieldAction(fieldCount));
 
     let rect = new fabric.Rect({
@@ -48,25 +47,21 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
     canvas?.setActiveObject(rect);
 
     setFieldCount((prev) => prev + 1);
-    console.log('필드 생성');
   }, [canvas, dispatch, fieldCount]);
 
   // remove field
   const removeField = useCallback(() => {
     let fields: any = canvas?.getActiveObjects();
 
-    if (fields.length === 0) {
-      console.log('삭제할 필드가 없습니다.');
-      return;
-    }
+    if (fields.length === 0) return;
 
     fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
 
     for (let i = 0; i < fields.length; i++) {
       canvas?.remove(fields[i]);
-      console.log('필드 삭제');
     }
 
+    dispatch(unSetActiveField());
     fields.map((field: any) => dispatch(removeFieldAction(field.data.id)));
   }, [canvas, dispatch]);
 
