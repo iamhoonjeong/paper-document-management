@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 
-const DocumentCreateButtons = () => {
+const Buttons = () => {
   const history = useHistory();
 
   return (
-    <DocumentButtonWrap>
-      <DocumentCompleteButton onClick={() => history.goBack()}>취소</DocumentCompleteButton>
-      <DocumentCompleteButton type="primary">저장</DocumentCompleteButton>
-    </DocumentButtonWrap>
+    <ButtonsWrap>
+      <StyledButton onClick={() => history.goBack()}>취소</StyledButton>
+      <StyledButton type="primary">저장</StyledButton>
+    </ButtonsWrap>
   );
 };
 
-export default DocumentCreateButtons;
+export default Buttons;
 
-const DocumentButtonWrap = styled.div`
+const ButtonsWrap = styled.div`
   height: fit-content;
   display: flex;
   justify-content: center;
@@ -25,7 +25,7 @@ const DocumentButtonWrap = styled.div`
   margin-top: 16px;
 `;
 
-const DocumentCompleteButton = styled(Button)`
+const StyledButton = styled(Button)`
   font-size: 12px;
   & + & {
     margin-left: 8px;

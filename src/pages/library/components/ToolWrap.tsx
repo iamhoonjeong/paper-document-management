@@ -85,7 +85,7 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
         dispatch(setCanvasImage(file));
         return Upload.LIST_IGNORE;
       } else {
-        message.error(`jpg, png 파일만 업로드할 수 있습니다.`);
+        message.info(`jpg, png 파일만 업로드할 수 있습니다.`);
         return Upload.LIST_IGNORE;
       }
     },
