@@ -82,7 +82,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 60px;
+  padding-top: 140px;
 `;
 
 const StyledLogin = styled.div`

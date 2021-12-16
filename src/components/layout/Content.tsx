@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 import { useSelector } from 'react-redux';
@@ -8,7 +8,6 @@ import { RootState } from '../../store';
 import Loading from '../Loading';
 
 import Home from '../../pages/home/Home';
-import Login from '../../pages/login/Login';
 import DocumentList from '../../pages/library/DocumentList';
 import DocumentCreate from '../../pages/library/DocumentCreate';
 import DocumentPageList from '../../pages/library/DocumentPageList';
@@ -21,14 +20,11 @@ const Content = () => {
     <>
       {loading && <Loading />}
       <StyledContent>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/library/document" exact component={DocumentList} />
-          <Route path="/library/document/create" component={DocumentCreate} />
-          <Route path="/library/document/pages" component={DocumentPageList} />
-          <Route path="/library/document/page/create" component={PageCreate} />
-        </Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/library/document" exact component={DocumentList} />
+        <Route path="/library/document/create" component={DocumentCreate} />
+        <Route path="/library/document/pages" component={DocumentPageList} />
+        <Route path="/library/document/page/create" component={PageCreate} />
       </StyledContent>
     </>
   );
