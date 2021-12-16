@@ -5,11 +5,13 @@ import { SwapOutlined } from '@ant-design/icons';
 
 type FieldProps = {
   titleNumber: number;
+  active?: boolean;
+  id: number;
 };
 
-const Field = ({ titleNumber }: FieldProps) => {
+const Field = ({ titleNumber, active, id }: FieldProps) => {
   return (
-    <StyledField>
+    <StyledField active={active}>
       <FieldHeaderWrap>
         <FieldTitle>
           <FieldIcon />
@@ -24,12 +26,12 @@ const Field = ({ titleNumber }: FieldProps) => {
   );
 };
 
-export default Field;
+export default React.memo(Field);
 
-const StyledField = styled.div`
+const StyledField = styled.div<{ active?: boolean }>`
   width: 100%;
   height: 120px;
-  border: 1px solid #e2e2e2;
+  border: ${(props) => (props.active ? '1px solid #1890ff' : '1px solid #e2e2e2')};
   margin-top: 16px;
 `;
 
