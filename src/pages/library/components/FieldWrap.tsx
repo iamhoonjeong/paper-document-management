@@ -5,7 +5,7 @@ import PageSubTitle from '../../../components/PageSubTitle';
 
 const FieldWrap = ({ children }: { children: React.ReactNode }) => {
   return (
-    <StyledFieldWrap>
+    <StyledFieldWrap className="field-wrap">
       <PageSubTitle title="필드 레이어" />
       {children}
     </StyledFieldWrap>
@@ -16,4 +16,8 @@ export default FieldWrap;
 
 const StyledFieldWrap = styled.div`
   overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
