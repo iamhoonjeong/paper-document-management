@@ -1,22 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Input } from 'antd';
-import { SwapOutlined } from '@ant-design/icons';
+import { CopyOutlined, SwapOutlined } from '@ant-design/icons';
 
 type FieldProps = {
   titleNumber: number;
-  active?: boolean;
   id: number;
+  active?: boolean;
 };
 
 const Field = ({ titleNumber, active, id }: FieldProps) => {
+  // scroll moving when create field position
+  useEffect(() => {
+    const field: HTMLDivElement | null = document.querySelector(`.field-${id}`);
+    field?.scrollIntoView({ behavior: 'smooth' });
+  }, [titleNumber, id]);
+
   return (
-    <StyledField active={active}>
-      <FieldHeaderWrap>
-        <FieldTitle>
-          <FieldIcon />
-          필드 {titleNumber}
-        </FieldTitle>
+    <StyledField active={active} className={`field-${id}`}>
+      <FieldHeaderWrap active={active}>
+        <FieldHeaderLeft>
+          <FieldTitle>
+            <FieldIcon />
+            필드 {titleNumber}
+          </FieldTitle>
+        </FieldHeaderLeft>
+        <FieldHeaderRight>
+          <CopyOutlined style={{ fontSize: '12px' }} />
+        </FieldHeaderRight>
       </FieldHeaderWrap>
       <FieldContentWrap>
         <FieldContentName>필드 이름</FieldContentName>
@@ -35,16 +46,29 @@ const StyledField = styled.div<{ active?: boolean }>`
   margin-top: 16px;
 `;
 
-const FieldHeaderWrap = styled.div`
+const FieldHeaderWrap = styled.div<{ active?: boolean }>`
   height: 46px;
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: ${(props) => (props.active ? '1px solid #1890ff' : '1px solid #e2e2e2')};
   padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
+const FieldHeaderLeft = styled.div``;
+
+const FieldHeaderRight = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+`;
+
 const FieldTitle = styled.p`
+  display: flex;
+  justify-content: space-between;
   font-size: 12px;
   font-weight: bold;
   margin: 0;

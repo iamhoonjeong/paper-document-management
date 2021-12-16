@@ -92,7 +92,7 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       };
     }
 
-    // set select group border & active fields
+    // set select group border & active fields & field position scroll moving
     canvas?.on('selection:created', (e) => {
       const fields = canvas.getActiveObjects();
 
@@ -108,14 +108,18 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
         fabric.Group.prototype.borderDashArray = [0];
         fabric.Object.prototype.borderColor = '#1890ff';
         fabric.Object.prototype.borderDashArray = [0];
-      } else {
+      } else if (fields.length === 1) {
         fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
         fabric.Object.prototype.borderColor = '#ff4d4f';
         fabric.Object.prototype.borderDashArray = [5, 5];
+
+        const fieldId = fields[0].data.id;
+        const fieldCard: HTMLDivElement | null = document.querySelector(`.field-${fieldId}`);
+        fieldCard?.scrollIntoView({ behavior: 'smooth' });
       }
     });
 
-    // set select group border & after deselect border & active fields
+    // set select group border & after deselect border & active fields & field position scroll moving
     canvas?.on('mouse:down', (e) => {
       const fields = canvas.getActiveObjects();
 
@@ -131,10 +135,14 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
         fabric.Group.prototype.borderDashArray = [0];
         fabric.Object.prototype.borderColor = '#1890ff';
         fabric.Object.prototype.borderDashArray = [0];
-      } else {
+      } else if (fields.length === 1) {
         fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
         fabric.Object.prototype.borderColor = '#ff4d4f';
         fabric.Object.prototype.borderDashArray = [5, 5];
+
+        const fieldId = fields[0].data.id;
+        const fieldCard: HTMLDivElement | null = document.querySelector(`.field-${fieldId}`);
+        fieldCard?.scrollIntoView({ behavior: 'smooth' });
       }
     });
 
