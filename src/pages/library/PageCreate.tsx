@@ -18,6 +18,7 @@ const DocumentCreate = () => {
 
   const Fields = useSelector((state: RootState) => state.canvas.fields);
   const activeFields: number[] = useSelector((state: RootState) => state.canvas.activeFields);
+  const canvasImage = useSelector((state: RootState) => state.canvas.image);
 
   return (
     <>
@@ -31,7 +32,7 @@ const DocumentCreate = () => {
               <CanvasWrap id="canvas-wrap">
                 <Canvas canvas={canvas} setCanvas={setCanvas} />
               </CanvasWrap>
-              <CanvasWrapCornerBox />
+              {canvasImage && <CanvasWrapCornerBox />}
             </ContentsLeft>
             <ContentsRight>
               <FieldWrap>

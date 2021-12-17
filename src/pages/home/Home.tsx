@@ -220,5 +220,5 @@ const Card = styled.div`
   height: 300px;
   background-color: #fff;
   padding: 20px;
-  overflow: scroll;
+  overflow: auto;
 `;
