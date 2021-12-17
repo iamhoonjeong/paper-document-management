@@ -80,7 +80,7 @@ const ContentsWrap = styled.div`
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const ContentWrap = styled.div`
@@ -94,7 +94,7 @@ const ContentsLeft = styled.div`
   height: 100%;
   border-right: 1px solid #e2e2e2;
   padding: 20px 20px 0 0;
-  overflow: scroll;
+  overflow: auto;
   position: relative;
 `;
 
@@ -111,7 +111,7 @@ const CanvasWrap = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     width: 7px;
