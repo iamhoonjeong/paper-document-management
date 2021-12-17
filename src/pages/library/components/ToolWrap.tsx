@@ -153,7 +153,7 @@ const StyledToolWrap = styled.div`
   min-width: 400px;
   height: 90px;
   border-bottom: 1px solid #e2e2e2;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const Tool = styled.div`
