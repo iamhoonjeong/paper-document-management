@@ -34,6 +34,6 @@ export default Content;
 
 const StyledContent = styled(Layout.Content)`
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 20px 30px 30px;
 `;

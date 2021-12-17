@@ -49,7 +49,7 @@ const SetTitleArea = styled.div`
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 10%);
   display: flex;
   align-items: center;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 const StyledInput = styled(Input)`

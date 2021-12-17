@@ -15,7 +15,7 @@ const FieldWrap = ({ children }: { children: React.ReactNode }) => {
 export default FieldWrap;
 
 const StyledFieldWrap = styled.div`
-  overflow: scroll;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     display: none;

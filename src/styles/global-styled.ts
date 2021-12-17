@@ -79,7 +79,7 @@ const GlobalStyle = createGlobalStyle`
 
   .ant-table {
     font-size: 12px;
-    overflow: scroll;
+    overflow: auto;
   }
 
   .ant-table-thead > tr > th {
