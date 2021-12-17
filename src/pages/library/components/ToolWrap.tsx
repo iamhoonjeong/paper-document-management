@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { Button, Slider, InputNumber, Upload, message } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
@@ -17,11 +17,11 @@ import PageSubTitle from '../../../components/PageSubTitle';
 
 type ToolWrapProps = {
   canvas: fabric.Canvas | undefined;
+  fieldCount: number;
+  setFieldCount: React.Dispatch<number>;
 };
 
-const ToolWrap = ({ canvas }: ToolWrapProps) => {
-  const [fieldCount, setFieldCount] = useState(0);
-
+const ToolWrap = ({ canvas, fieldCount, setFieldCount }: ToolWrapProps) => {
   const dispatch = useDispatch();
   const zoomValue = useSelector((state: RootState) => state.canvas.zoomValue);
 
@@ -46,8 +46,8 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
     canvas?.add(rect);
     canvas?.setActiveObject(rect);
 
-    setFieldCount((prev) => prev + 1);
-  }, [canvas, dispatch, fieldCount]);
+    setFieldCount(fieldCount + 1);
+  }, [canvas, dispatch, fieldCount, setFieldCount]);
 
   // remove field
   const removeField = useCallback(() => {
@@ -63,6 +63,22 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
 
     dispatch(unSetActiveField());
     fields.map((field: any) => dispatch(removeFieldAction(field.data.id)));
+  }, [canvas, dispatch]);
+
+  const removeAllField = useCallback(() => {
+    if (window.confirm('전체 필드를 삭제하시겠어요?')) {
+      let allFields: fabric.Object[] | undefined = canvas?.getObjects();
+
+      if (allFields) {
+        for (let i = 0; i < allFields?.length; i++) {
+          canvas?.remove(allFields[i]);
+        }
+        dispatch(unSetActiveField());
+        allFields.map((field: any) => dispatch(removeFieldAction(field.data.id)));
+      }
+    } else {
+      return false;
+    }
   }, [canvas, dispatch]);
 
   // zoom value change
@@ -94,6 +110,7 @@ const ToolWrap = ({ canvas }: ToolWrapProps) => {
         <ToolCenterWrap>
           <StyledToolButton onClick={addField}>필드 추가</StyledToolButton>
           <StyledToolButton onClick={removeField}>필드 삭제</StyledToolButton>
+          <StyledToolButton onClick={removeAllField}>전체 필드 삭제</StyledToolButton>
         </ToolCenterWrap>
       </Tool>
       <Tool>
