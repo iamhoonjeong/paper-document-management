@@ -5,7 +5,6 @@
 3. page control in page list
 4. field name on canvas field
 5. change field edit default value(shift key)
-6. field copy function
 
 ## local start
 

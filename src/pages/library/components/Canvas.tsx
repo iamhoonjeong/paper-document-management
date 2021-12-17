@@ -113,9 +113,11 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
         fabric.Object.prototype.borderColor = '#ff4d4f';
         fabric.Object.prototype.borderDashArray = [5, 5];
 
-        const fieldId = fields[0].data.id;
-        const fieldCard: HTMLDivElement | null = document.querySelector(`.field-${fieldId}`);
-        fieldCard?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          const fieldId = fields[0].data.id;
+          const fieldCard: HTMLDivElement | null = document.querySelector(`.field-${fieldId}`);
+          fieldCard?.scrollIntoView({ behavior: 'smooth' });
+        }, 0);
       }
     });
 
@@ -140,9 +142,11 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
         fabric.Object.prototype.borderColor = '#ff4d4f';
         fabric.Object.prototype.borderDashArray = [5, 5];
 
-        const fieldId = fields[0].data.id;
-        const fieldCard: HTMLDivElement | null = document.querySelector(`.field-${fieldId}`);
-        fieldCard?.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => {
+          const fieldId = fields[0].data.id;
+          const fieldCard: HTMLDivElement | null = document.querySelector(`.field-${fieldId}`);
+          fieldCard?.scrollIntoView({ behavior: 'smooth' });
+        }, 0);
       }
     });
 

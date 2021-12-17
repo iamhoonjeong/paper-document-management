@@ -14,6 +14,8 @@ import Buttons from './components/Buttons';
 
 const DocumentCreate = () => {
   const [canvas, setCanvas] = useState<fabric.Canvas | undefined>();
+  const [fieldCount, setFieldCount] = useState(0);
+
   const Fields = useSelector((state: RootState) => state.canvas.fields);
   const activeFields: number[] = useSelector((state: RootState) => state.canvas.activeFields);
 
@@ -23,7 +25,7 @@ const DocumentCreate = () => {
       <Wrap>
         <TitleWrap title="페이지" />
         <ContentsWrap>
-          <ToolWrap canvas={canvas} />
+          <ToolWrap canvas={canvas} fieldCount={fieldCount} setFieldCount={setFieldCount} />
           <ContentWrap>
             <ContentsLeft>
               <CanvasWrap id="canvas-wrap">
@@ -35,9 +37,24 @@ const DocumentCreate = () => {
               <FieldWrap>
                 {Fields.map((el: any, i: any) => {
                   return activeFields.includes(el.id) ? (
-                    <Field key={i} titleNumber={i + 1} active id={el.id} />
+                    <Field
+                      key={i}
+                      titleNumber={i + 1}
+                      active
+                      id={el.id}
+                      canvas={canvas}
+                      fieldCount={fieldCount}
+                      setFieldCount={setFieldCount}
+                    />
                   ) : (
-                    <Field key={i} titleNumber={i + 1} id={el.id} />
+                    <Field
+                      key={i}
+                      titleNumber={i + 1}
+                      id={el.id}
+                      canvas={canvas}
+                      fieldCount={fieldCount}
+                      setFieldCount={setFieldCount}
+                    />
                   );
                 })}
               </FieldWrap>
