@@ -39,6 +39,7 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
       new fabric.Canvas('canvas', {
         backgroundColor: '#fff',
         selectionColor: 'rgba(30, 35, 46, 0.3)',
+        uniformScaling: false,
       }),
     );
   }, []);
