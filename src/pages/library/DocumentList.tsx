@@ -8,10 +8,6 @@ import PageTitle from '../../components/PageTitle';
 const DocumentList = () => {
   const columns = [
     {
-      title: '문서 ID',
-      dataIndex: 'documentId',
-    },
-    {
       title: '문서 명',
       dataIndex: 'documentName',
     },
@@ -24,16 +20,20 @@ const DocumentList = () => {
       dataIndex: 'modifiedDate',
     },
     {
-      title: '',
+      title: '문서 아이디',
+      dataIndex: 'documentId',
+    },
+    {
+      title: '문서 보기',
       dataIndex: 'documentModify',
-      width: '80px',
+      width: '',
     },
   ];
   const data: any = [];
   for (let i = 0; i < 500; i++) {
     data.push({
       key: i,
-      documentId: 100000 + i,
+      documentId: 1000 + i,
       documentName: `문서 ${i}`,
       createDate: `2021-11-11 14:43:15`,
       modifiedDate: `2021-11-11 14:43:15`,
