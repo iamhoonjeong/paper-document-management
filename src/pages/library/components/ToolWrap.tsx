@@ -73,6 +73,7 @@ const ToolWrap = ({ canvas, fieldCount, setFieldCount }: ToolWrapProps) => {
         for (let i = 0; i < allFields?.length; i++) {
           canvas?.remove(allFields[i]);
         }
+        fabric.Group.prototype.borderColor = 'rgba(0, 0, 0, 0)';
         dispatch(unSetActiveField());
         allFields.map((field: any) => dispatch(removeFieldAction(field.data.id)));
       }
