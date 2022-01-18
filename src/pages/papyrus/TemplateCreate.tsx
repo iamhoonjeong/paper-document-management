@@ -24,15 +24,15 @@ const DocumentCreate = () => {
     dispatch(setCreateTitleInput(''));
 
     setTimeout(() => {
-      history.push('/library/document');
+      history.push('/papyrus/template');
     }, 500);
   }, [dispatch, history, titleWrapInputData]);
 
   return (
     <>
-      <PageTitle>문서 만들기</PageTitle>
+      <PageTitle>템플릿 만들기</PageTitle>
       <TitleWrap
-        title="문서"
+        title="템플릿"
         documentCreate={
           <>
             <DocumentCreateButton onClick={() => history.goBack()}>취소</DocumentCreateButton>

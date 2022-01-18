@@ -197,7 +197,7 @@ const Canvas = ({ canvas, setCanvas }: CanvasProps) => {
   // exit canvas confirm
   useEffect(() => {
     const unblock = history.block((location, action) => {
-      if (action && location.pathname !== '/library/document/page/create') {
+      if (action && location.pathname !== '/papyrus/template/page/create') {
         if (confirm('편집을 종료하시겠어요?')) {
           dispatch(setCanvasImage(null));
           dispatch(setCanvasWidth(0));

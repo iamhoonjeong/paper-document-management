@@ -94,6 +94,10 @@ const GlobalStyle = createGlobalStyle`
   .ant-input {
     font-size: 12px;
   }
+
+  .ant-table-column-title {
+    font-weight: bold;
+  }
 `;
 
 export default GlobalStyle;
