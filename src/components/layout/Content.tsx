@@ -8,10 +8,10 @@ import { RootState } from '../../store';
 import Loading from '../Loading';
 
 import Home from '../../pages/home/Home';
-import DocumentList from '../../pages/library/DocumentList';
-import DocumentCreate from '../../pages/library/DocumentCreate';
-import DocumentPageList from '../../pages/library/DocumentPageList';
-import PageCreate from '../../pages/library/PageCreate';
+import DocumentList from '../../pages/papyrus/TemplateList';
+import DocumentCreate from '../../pages/papyrus/TemplateCreate';
+import DocumentPageList from '../../pages/papyrus/TemplatePageList';
+import PageCreate from '../../pages/papyrus/PageCreate';
 
 const Content = () => {
   const loading = useSelector((state: RootState) => state.loading.onLoading);
@@ -21,10 +21,10 @@ const Content = () => {
       {loading && <Loading />}
       <StyledContent>
         <Route path="/" exact component={Home} />
-        <Route path="/library/document" exact component={DocumentList} />
-        <Route path="/library/document/create" component={DocumentCreate} />
-        <Route path="/library/document/pages" component={DocumentPageList} />
-        <Route path="/library/document/page/create" component={PageCreate} />
+        <Route path="/papyrus/template" exact component={DocumentList} />
+        <Route path="/papyrus/template/create" component={DocumentCreate} />
+        <Route path="/papyrus/template/pages" component={DocumentPageList} />
+        <Route path="/papyrus/template/page/create" component={PageCreate} />
       </StyledContent>
     </>
   );
