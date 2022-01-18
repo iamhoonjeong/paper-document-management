@@ -66,7 +66,7 @@ const DocumentPages = () => {
       ),
       documentEdit: (
         <EditButton type="ghost">
-          <Link to="/library/document/page/create">수정</Link>
+          <Link to="/papyrus/template/page/create">수정</Link>
         </EditButton>
       ),
     });
@@ -90,7 +90,7 @@ const DocumentPages = () => {
       <PageTitle>페이지 목록</PageTitle>
       <ButtonWrap>
         <StyledButton type="primary">
-          <Link to="/library/document/page/create">페이지 만들기</Link>
+          <Link to="/papyrus/template/page/create">페이지 만들기</Link>
         </StyledButton>
         <StyledButton type="default">페이지 다운로드</StyledButton>
         <StyledButton danger>삭제</StyledButton>
