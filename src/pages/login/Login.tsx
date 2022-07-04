@@ -48,8 +48,8 @@ function Login() {
   return (
     <Wrap>
       <StyledLogin>
-        <Title>smallticket</Title>
-        <SubTitle>common platform</SubTitle>
+        <Title>paper</Title>
+        <SubTitle>document management</SubTitle>
         <InputWrap marginTop>
           <InputId
             name="id"

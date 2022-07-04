@@ -37,17 +37,13 @@ const SideNav = () => {
       style={{ fontSize: '12px' }}
     >
       <LogoWrap>
-        {collapsed ? (
-          <LogoNarrow>S</LogoNarrow>
-        ) : (
-          <LogoWide src="/images/logos/smallticket_white.png" alt="company logo" />
-        )}
+        {collapsed ? <LogoNarrow>S</LogoNarrow> : <LogoWide src="/images/logos/logo.svg" alt="company logo" />}
       </LogoWrap>
       <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
         <Item key="1" icon={<HomeOutlined />}>
           <Link to="/">홈</Link>
         </Item>
-        <SubMenu key="sub1" icon={<BookOutlined />} title="파피루스">
+        <SubMenu key="sub1" icon={<BookOutlined />} title="문서 관리">
           <Item key="2">
             <Link to="/papyrus/template">템플릿</Link>
           </Item>
